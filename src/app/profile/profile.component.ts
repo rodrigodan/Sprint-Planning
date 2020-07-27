@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProfileComponent implements OnInit {
 
+    userNameInserted: boolean = true;
+
     constructor() { }
 
     ngOnInit() {}
