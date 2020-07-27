@@ -31,12 +31,14 @@ export class SignupComponent implements OnInit {
         console.log(email);
         console.log(password);
 
-        this.authService.signUp(username, email,password).subscribe(resData => {
-            console.log(resData);
-        },
-        error => {
-            console.log(error);
-        });
+        this.authService.signUp(username, email,password);
+
+        // this.authService.signUp(username, email,password).subscribe(resData => {
+        //     console.log(resData);
+        // },
+        // error => {
+        //     console.log(error);
+        // });
 
         signupForm.reset();
         

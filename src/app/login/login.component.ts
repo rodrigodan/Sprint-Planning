@@ -25,14 +25,15 @@ export class LoginComponent implements OnInit {
 
     console.log(email);
     console.log(password);
+    this.authService.login(email,password);
 
-    this.authService.login(email,password).subscribe(resData => {
-        console.log(resData);
-        this.router['/sprint-Planning']
-    },
-    error => {
-        console.log(error);
-    });
+    // this.authService.login(email,password).subscribe(resData => {
+    //     console.log(resData);
+    //     this.router['/sprint-Planning']
+    // },
+    // error => {
+    //     console.log(error);
+    // });
 
     signupForm.reset();
     
