@@ -17,6 +17,10 @@ import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDataComponent } from './sections/user-data/user.data.component';
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { UserDataComponent } from './sections/user-data/user.data.component';
     RouterModule,
     AppRoutingModule,
     HomeModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [HttpClientModule, RouterModule],
   bootstrap: [AppComponent]
