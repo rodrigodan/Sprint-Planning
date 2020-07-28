@@ -4,6 +4,7 @@ import { tap } from "rxjs/operators";
 import { Subject, Observable } from "rxjs";
 import { User } from "../user/user.model";
 import { AngularFireAuth } from "angularfire2/auth";
+import { Router } from "@angular/router";
 
 interface AuthResponseData{
     kind: string;
@@ -20,7 +21,7 @@ interface AuthResponseData{
 export class AuthService{
     user: Observable<firebase.User>;
 
-    constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth) {
+    constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth, private router: Router) {
         this.user = firebaseAuth.authState;
     }
 
@@ -31,6 +32,7 @@ export class AuthService{
         .createUserWithEmailAndPassword(email, password)
         .then(value => {
             console.log('Success!', value);
+            this.router.navigate(['/login']);
         })
         .catch(err => {
             console.log('Something went wrong:',err.message);
