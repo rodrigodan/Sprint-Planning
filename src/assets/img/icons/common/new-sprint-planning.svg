@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="424.3px" height="421.1px" viewBox="0 0 424.3 421.1" style="enable-background:new 0 0 424.3 421.1;" xml:space="preserve"
+	>
+<style type="text/css">
+	.st0{fill:url(#XMLID_26_);}
+	.st1{fill:#FFFFFF;}
+	.st2{fill-rule:evenodd;clip-rule:evenodd;fill:#098BCB;}
+	.st3{fill:#D7DBDE;}
+</style>
+<linearGradient id="XMLID_26_" gradientUnits="userSpaceOnUse" x1="212.1481" y1="8.9322" x2="212.1481" y2="429.9898">
+	<stop  offset="0" style="stop-color:#0CA3DD"/>
+	<stop  offset="1" style="stop-color:#0296CC"/>
+</linearGradient>
+<ellipse id="XMLID_12_" class="st0" cx="212.1" cy="210.5" rx="212.1" ry="210.5"/>
+<path id="XMLID_11_" class="st1" d="M309.4,351.5H114.2c-4.3,0-7.9-3.5-7.9-7.9V73.4c0-4.3,3.5-7.9,7.9-7.9h195.2
+	c4.3,0,7.9,3.5,7.9,7.9v270.2C317.3,348,313.8,351.5,309.4,351.5z"/>
+<polygon id="XMLID_10_" class="st2" points="179.1,196.8 179.1,218.8 165.4,218.8 165.4,232.5 143.5,232.5 143.5,218.8 129.8,218.8 
+	129.8,196.8 143.5,196.8 143.5,183.1 165.4,183.1 165.4,196.8 "/>
+<rect id="XMLID_9_" x="195.2" y="193.7" class="st3" width="96.6" height="11.3"/>
+<rect id="XMLID_8_" x="195.2" y="210.6" class="st3" width="68.1" height="11.3"/>
+<polygon id="XMLID_7_" class="st2" points="179.1,281.1 179.1,303.1 165.4,303.1 165.4,316.9 143.5,316.9 143.5,303.1 129.8,303.1 
+	129.8,281.1 143.5,281.1 143.5,267.4 165.4,267.4 165.4,281.1 "/>
+<rect id="XMLID_6_" x="195.2" y="278" class="st3" width="96.6" height="11.3"/>
+<rect id="XMLID_5_" x="195.2" y="294.9" class="st3" width="68.1" height="11.3"/>
+<polygon id="XMLID_4_" class="st2" points="179.1,115.3 179.1,137.2 165.4,137.2 165.4,151 143.5,151 143.5,137.2 129.8,137.2 
+	129.8,115.3 143.5,115.3 143.5,101.5 165.4,101.5 165.4,115.3 "/>
+<rect id="XMLID_3_" x="195.2" y="112.1" class="st3" width="96.6" height="11.3"/>
+<rect id="XMLID_2_" x="195.2" y="130" class="st3" width="68.1" height="10.3"/>
+</svg>

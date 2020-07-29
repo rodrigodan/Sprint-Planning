@@ -20,6 +20,7 @@ import { UserDataComponent } from './sections/user-data/user.data.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { NewPlanningMeeting } from './planning/new.planning.component';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    UserDataComponent
+    UserDataComponent,
+    NewPlanningMeeting
   ],
   imports: [
     BrowserModule,
