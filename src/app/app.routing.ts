@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SignupComponent } from './signup/signup.component';
-import { LandingComponent } from './landing/landing.component';
+import { MeetingPlace } from './meetingPlace/meeting.place.component';
 import { LoginComponent } from './login/login.component';
 import { NewPlanningMeeting } from './planning/new.planning.component';
 
@@ -14,7 +14,7 @@ const routes: Routes =[
     { path: 'home',             component: HomeComponent },
     { path: 'user-profile',     component: ProfileComponent },
     { path: 'register',           component: SignupComponent },
-    { path: 'landing',          component: LandingComponent },
+    { path: 'meeting-place',          component: MeetingPlace },
     { path: 'login',          component: LoginComponent },
     { path: 'new-planning-meeting',          component: NewPlanningMeeting },
 
