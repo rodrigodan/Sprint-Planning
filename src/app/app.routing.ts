@@ -9,16 +9,18 @@ import { SignupComponent } from './signup/signup.component';
 import { MeetingPlace } from './meetingPlace/meeting.place.component';
 import { LoginComponent } from './login/login.component';
 import { NewPlanningMeeting } from './planning/new.planning.component';
+import { AuthGuard } from './auth/auth.guards.service';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
-    { path: 'user-profile',     component: ProfileComponent },
+    { path: 'user-profile',     canActivate: [AuthGuard], component: ProfileComponent },
     { path: 'register',           component: SignupComponent },
-    { path: 'meeting-place',          component: MeetingPlace },
+    { path: 'meeting-place',          canActivate: [AuthGuard], component: MeetingPlace },
     { path: 'login',          component: LoginComponent },
-    { path: 'new-planning-meeting',          component: NewPlanningMeeting },
+    { path: 'new-planning-meeting',          canActivate: [AuthGuard], component: NewPlanningMeeting },
 
-    { path: '', redirectTo: 'login', pathMatch: 'full' }
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    {path: "**", redirectTo:"login"}
 ];
 
 @NgModule({
@@ -26,7 +28,7 @@ const routes: Routes =[
     CommonModule,
     BrowserModule,
     RouterModule.forRoot(routes,{
-      useHash: true
+      useHash: false
     })
   ],
   exports: [

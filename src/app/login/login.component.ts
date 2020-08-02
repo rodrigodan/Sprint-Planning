@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  isFetching = false;
   focus;
   focus1;
   constructor(private authService: AuthService, private router: Router) { }
@@ -20,23 +21,21 @@ export class LoginComponent implements OnInit {
     if(!signupForm.valid){
         return ;
     }
+    this.isFetching = true;
+
     const email = signupForm.value.email;
     const password = signupForm.value.password;
 
     console.log(email);
     console.log(password);
-    this.authService.login(email,password);
-
-    // this.authService.login(email,password).subscribe(resData => {
-    //     console.log(resData);
-    //     this.router['/sprint-Planning']
-    // },
-    // error => {
-    //     console.log(error);
-    // });
-
+    this.authService.login(email,password).
+    then(valueReturned => {
+      this.isFetching = false;
+    })
+    .catch(valueReturned => {
+      this.isFetching = false;
+    });
     signupForm.reset();
-    
 }
 
 

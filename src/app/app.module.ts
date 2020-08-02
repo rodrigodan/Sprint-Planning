@@ -21,6 +21,9 @@ import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NewPlanningMeeting } from './planning/new.planning.component';
+import { AuthGuard } from './auth/auth.guards.service';
+import { AuthService } from './auth/auth.service';
+import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 
 
 @NgModule({
@@ -33,7 +36,8 @@ import { NewPlanningMeeting } from './planning/new.planning.component';
     FooterComponent,
     LoginComponent,
     UserDataComponent,
-    NewPlanningMeeting
+    NewPlanningMeeting,
+    LoadingSpinner
   ],
   imports: [
     BrowserModule,
@@ -46,7 +50,7 @@ import { NewPlanningMeeting } from './planning/new.planning.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
   ],
-  providers: [HttpClientModule, RouterModule],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

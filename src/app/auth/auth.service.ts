@@ -17,9 +17,10 @@ interface AuthResponseData{
     registered?: boolean;
 }
 
-@Injectable({ providedIn: 'root', })
+@Injectable()
 export class AuthService{
     user: Observable<firebase.User>;
+    isLoggedIn: boolean = false;
 
     constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth, private router: Router) {
         this.user = firebaseAuth.authState;
@@ -39,17 +40,37 @@ export class AuthService{
         });
     } 
     
-    login(email: string, password: string) {
+    login(email: string, password: string): any{
         this.firebaseAuth
           .auth
-          .signInWithEmailAndPassword(email, password)
-          .then(value => {
-            console.log('Nice, it worked!');
+          .signInWithEmailAndPassword(email, password).
+          then(value => {
+            console.log(value);
+            this.isLoggedIn = true;
+            this.router.navigate(['/new-planning-meeting']);
+            let promise = new Promise((resolve, reject) => {
+                resolve(true);
+            });
+            return promise;
           })
           .catch(err => {
             console.log('Something went wrong:',err.message);
+            this.isLoggedIn = false;
+            let promise = new Promise((resolve, reject) => {
+                reject(false);
+            })
+            return promise;
           });
-      }
+    }
+
+    loginIsAuthenticated(){
+        const promise = new Promise(
+            (resolve,reject) => {
+                resolve(this.isLoggedIn);
+            }
+        );
+        return promise;
+    }
 
       logout() {
         this.firebaseAuth
