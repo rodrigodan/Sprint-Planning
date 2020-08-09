@@ -13,9 +13,9 @@ import { AuthGuard } from './auth/auth.guards.service';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
-    { path: 'user-profile',     canActivate: [AuthGuard], component: ProfileComponent },
+    { path: 'user-profile',     component: ProfileComponent },
     { path: 'register',           component: SignupComponent },
-    { path: 'meeting-place',          canActivate: [AuthGuard], component: MeetingPlace },
+    { path: 'meeting-place',          component: MeetingPlace },
     { path: 'login',          component: LoginComponent },
     { path: 'new-planning-meeting',          canActivate: [AuthGuard], component: NewPlanningMeeting },
 
@@ -35,3 +35,4 @@ const routes: Routes =[
   ],
 })
 export class AppRoutingModule { }
+// https://medium.com/madhash/how-to-create-and-read-things-in-firebase-c5f51d0552ce

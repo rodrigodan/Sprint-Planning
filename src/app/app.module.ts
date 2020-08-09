@@ -24,6 +24,7 @@ import { NewPlanningMeeting } from './planning/new.planning.component';
 import { AuthGuard } from './auth/auth.guards.service';
 import { AuthService } from './auth/auth.service';
 import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -50,7 +51,7 @@ import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.compone
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

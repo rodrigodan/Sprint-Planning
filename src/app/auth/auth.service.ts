@@ -2,9 +2,12 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { tap } from "rxjs/operators";
 import { Subject, Observable } from "rxjs";
-import { User } from "../user/user.model";
+// import { User } from "../user/user.model";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
+import { AngularFirestore } from '@angular/fire/firestore';
+import { rejects } from "assert";
+
 
 interface AuthResponseData{
     kind: string;
@@ -17,23 +20,50 @@ interface AuthResponseData{
     registered?: boolean;
 }
 
+class User{
+    name: string;
+    email: string;
+    password: string;
+    constructor(name,email,password){
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+}
+
 @Injectable()
 export class AuthService{
     user: Observable<firebase.User>;
     isLoggedIn: boolean = false;
 
-    constructor(private http: HttpClient, private firebaseAuth: AngularFireAuth, private router: Router) {
-        this.user = firebaseAuth.authState;
+    constructor(
+        private http: HttpClient, 
+        private firebaseAuth: AngularFireAuth, 
+        private router: Router,
+        private firestore: AngularFirestore) {
+        // this.user = firebaseAuth.authState;
     }
 
     signUp(name, email: string, password: string){
+
+        let user:Object = {
+            name2: name,
+            email2: email,
+            password2: password
+        };
 
         this.firebaseAuth
         .auth
         .createUserWithEmailAndPassword(email, password)
         .then(value => {
             console.log('Success!', value);
-            this.router.navigate(['/login']);
+            this.firestore
+                .collection("Managers")
+                .add(user)
+                .then(value2 =>{
+                    this.router.navigate(['/login']);
+                    console.log('entered here!');
+                })
         })
         .catch(err => {
             console.log('Something went wrong:',err.message);
