@@ -1,18 +1,26 @@
 <main class="profile-page">
 
+    <section style=" position: absolute; width: 100%; height: 100vh; padding: 50vh;" *ngIf="!loadedLink || !loadedMeetingPlacePage" class="section section-shaped section-lg">
+        <div class="row justify-content-center">
+            <div class="d-flex align-items-center">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+        </div>
+    </section>
+
     <section
-class="section" 
-style="width:100%; 
-      height: 100vh; 
-      padding: 35vh"
+    *ngIf="loadedLink"
+    class="section" 
+    style="width:100%; 
+        height: 100vh; 
+        padding: 25vh"
 >
 
     <div class="d-flex justify-content-center">
         <div class="d-flex align-items-center">
 
 
-
-                <div class="form-group">
+                <form role="form" class="form-group" (ngSubmit)="onSubmit(f)" #f="ngForm">
 
 
                     <div class="d-flex justify-content-center">
@@ -23,8 +31,10 @@ style="width:100%;
 
                     <input 
                         type="text" 
-                        placeholder="Full name" 
-                        class="form-control" 
+                        placeholder="Sprint Name" 
+                        class="form-control"
+                        ngModel
+                        name="sprint"
                     />
                 
                     <br />
@@ -37,16 +47,38 @@ style="width:100%;
                         align-items-end"
                     >
                         <button 
-                            type="button" 
+                            type="submit" 
                             class="btn btn-primary" 
                             style="background-color: #172B4D;"
                         >
                             Create A New Planning Meeting
                         </button>
                     </div>
-                </div>
-         
+                </form>
+ 
         </div>
+    </div>
+
+    <div *ngIf="loadedMeetingPlacePage" class="d-flex justify-content-center">
+
+            <div *ngIf="session">
+                <p style="text-align: center;">Share with the Emplyees:</p>
+                {{session}}
+                <br />
+                <br />
+
+                <div style="text-align: center;">
+                    <button 
+                        type="button" 
+                        class="btn btn-primary" 
+                        style="background-color: #FB6340; border-color: #FB6340;"
+                        (click)="statMeetingSession()"
+                    >
+                        Start meeting
+                    </button>
+                </div>
+            </div>
+
     </div>
 </section>
      

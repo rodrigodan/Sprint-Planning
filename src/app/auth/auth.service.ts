@@ -70,28 +70,40 @@ export class AuthService{
         });
     } 
     
-    login(email: string, password: string): any{
-        this.firebaseAuth
+    async login(email: string, password: string): Promise<boolean>{
+        let promise;
+        await this.firebaseAuth
           .auth
           .signInWithEmailAndPassword(email, password).
           then(value => {
             console.log(value);
             this.isLoggedIn = true;
             this.router.navigate(['/new-planning-meeting']);
-            let promise = new Promise((resolve, reject) => {
+            promise = new Promise((resolve, reject) => {
                 resolve(true);
             });
-            return promise;
           })
           .catch(err => {
             console.log('Something went wrong:',err.message);
             this.isLoggedIn = false;
-            let promise = new Promise((resolve, reject) => {
-                reject(false);
+            promise = new Promise((resolve, reject) => {
+               throw new Error("false");
             })
-            return promise;
           });
+          return promise;
+
     }
+
+    newMeetingPlanning(sprintName: String): any{
+        let sprint:Object = {
+            sprintName: sprintName
+        }
+        return (this.firestore
+        .collection("Sessions")
+        .add(sprint))
+    }
+
+
 
     loginIsAuthenticated(){
         const promise = new Promise(

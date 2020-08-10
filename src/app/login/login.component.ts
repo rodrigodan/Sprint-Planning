@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   isFetching = false;
+  invalidCredentials = false;
   focus;
   focus1;
   constructor(private authService: AuthService, private router: Router) { }
@@ -30,9 +31,12 @@ export class LoginComponent implements OnInit {
     console.log(password);
     this.authService.login(email,password).
     then(valueReturned => {
+      this.invalidCredentials = false;
       this.isFetching = false;
     })
     .catch(valueReturned => {
+      this.invalidCredentials = true;
+      
       this.isFetching = false;
     });
     signupForm.reset();

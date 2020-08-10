@@ -30,7 +30,11 @@
                                 </div>
                             </div>
                         </div>
+
+                        
+                        <span style="color:red;" *ngIf="invalidCredentials">E-mail or Password invalid</span>
                         <div class="card-body px-lg-2 py-lg-2">
+
 
                             <form role="form" (ngSubmit)="onSubmit2(f)" #f="ngForm">
 
@@ -42,7 +46,8 @@
                                     <div 
                                         class="input-group input-group-alternative">
 
-                                        <div class="input-group-prepend">
+                                        <div 
+                                        class="input-group-prepend">
                                             <span 
                                                 class="input-group-text"
                                             >
@@ -50,9 +55,13 @@
                                             </span>
                                         </div>
 
+                                        
                                         <input 
                                             ngModel
                                             name="email"
+                                            #email="ngModel"
+                                            required
+                                            email
                                             class="form-control" 
                                             placeholder="Email" 
                                             type="email" 
@@ -61,7 +70,10 @@
                                         >
 
                                     </div>
-                                </div>
+                                    <span 
+                                    style="color:red"
+                                    *ngIf="(!email.valid && email.touched)">Insert a valid E-mail</span>
+                                    </div>
 
                                 <div 
                                     class="form-group" 
@@ -79,6 +91,8 @@
                                         <input 
                                             ngModel
                                             name="password"
+                                            #password="ngModel"
+                                            required
                                             class="form-control" 
                                             placeholder="Password" 
                                             type="password" 
@@ -86,6 +100,11 @@
                                             (blur)="focus1=false"
                                         >
                                     </div>
+
+                                    <span 
+                                        style="color:red"
+                                        *ngIf="(!password.valid && password.touched)">Inser a valid password
+                                    </span>
 
                                 </div>
 
@@ -100,6 +119,7 @@
                                     <button 
                                         type="submit" 
                                         class="btn btn-primary my-4"
+                                        [disabled]="!f.valid"
                                     >   
                                         Sign in
                                     </button>
