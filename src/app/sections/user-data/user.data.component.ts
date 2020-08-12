@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
     selector: 'user-data-profile',
@@ -9,6 +10,7 @@ export class UserDataComponent implements OnInit {
 
     constructor() { }
 
+  
     ngOnInit() {}
 
 }

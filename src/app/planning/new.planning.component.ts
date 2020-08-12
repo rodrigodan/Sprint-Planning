@@ -24,7 +24,7 @@ export class NewPlanningMeeting implements OnInit {
         .then(value =>{
             // this.router.navigate(['/meeting-place']);
             console.log('entered here!');
-            this.session = "http://localhost:4200/" + value.id;
+            this.session = "http://localhost:4200/" + 'user-employee/' + value.id;
             this.loadedLink = true;
         });
     }

@@ -13,7 +13,7 @@ import { AuthGuard } from './auth/auth.guards.service';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
-    { path: 'user-profile',     component: ProfileComponent },
+    { path: 'user-employee/:id',     component: ProfileComponent },
     { path: 'register',           component: SignupComponent },
     { path: 'meeting-place',          component: MeetingPlace },
     { path: 'login',          component: LoginComponent },

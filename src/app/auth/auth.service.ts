@@ -7,6 +7,7 @@ import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { rejects } from "assert";
+import { async } from "@angular/core/testing";
 
 
 interface AuthResponseData{
@@ -96,11 +97,38 @@ export class AuthService{
 
     newMeetingPlanning(sprintName: String): any{
         let sprint:Object = {
+            names:[],
             sprintName: sprintName
         }
         return (this.firestore
         .collection("Sessions")
         .add(sprint))
+    }
+
+    async newEmployee(employeeName: string, url: string){
+
+        let docRef =  this.firestore.collection("Sessions").doc(url);
+        let dataFromBase;
+
+        await docRef.get().toPromise().then(function(doc) {
+            if (doc.exists) {
+                dataFromBase = doc.data().names;
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+        dataFromBase.push(employeeName);
+
+        docRef.update({
+                names: dataFromBase,
+            })
+        .then(function() {
+            console.log("Document successfully written!");
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+        });
     }
 
 

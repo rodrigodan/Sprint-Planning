@@ -22,8 +22,11 @@ style="width:100%;
                 <br />
 
 
-                <div class="form-group">
-                    <input 
+                <form class="form-group">
+                    <input
+                        ngModel
+                        name="name" 
+                        required
                         type="text" 
                         placeholder="Full name" 
                         class="form-control" 
@@ -36,14 +39,14 @@ style="width:100%;
                         align-items-end"
                     >
                         <button 
-                            type="button" 
+                            type="submit" 
                             class="btn btn-primary" 
                             style="background-color: #172B4D;"
                         >
                             Ok
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>
