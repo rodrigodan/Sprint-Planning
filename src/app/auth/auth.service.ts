@@ -8,6 +8,7 @@ import { Router } from "@angular/router";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { rejects } from "assert";
 import { async } from "@angular/core/testing";
+import { UserNoManagerDatas } from "../shared/services/service.user.component";
 
 
 interface AuthResponseData{
@@ -41,7 +42,8 @@ export class AuthService{
         private http: HttpClient, 
         private firebaseAuth: AngularFireAuth, 
         private router: Router,
-        private firestore: AngularFirestore) {
+        private firestore: AngularFirestore,
+        private userCommon: UserNoManagerDatas) {
         // this.user = firebaseAuth.authState;
     }
 
@@ -109,10 +111,13 @@ export class AuthService{
 
         let docRef =  this.firestore.collection("Sessions").doc(url);
         let dataFromBase;
+        let dataFromBaseSprint;
+        let worked: boolean = true;
 
         await docRef.get().toPromise().then(function(doc) {
             if (doc.exists) {
                 dataFromBase = doc.data().names;
+                dataFromBaseSprint = doc.data().sprintName;
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
@@ -120,15 +125,22 @@ export class AuthService{
 
         dataFromBase.push(employeeName);
 
-        docRef.update({
+        await docRef.update({
                 names: dataFromBase,
             })
         .then(function() {
             console.log("Document successfully written!");
+            worked = true;
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);
+            worked = false;
         });
+        this.userCommon.userName = employeeName;
+        this.userCommon.userId = url;
+        this.userCommon.userType = 'commonUser'
+        this.userCommon.sprintName = dataFromBaseSprint;
+        this.router.navigate(['/meeting-place/' + url]);
     }
 
 

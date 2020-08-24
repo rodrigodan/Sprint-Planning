@@ -25,6 +25,8 @@ import { AuthGuard } from './auth/auth.guards.service';
 import { AuthService } from './auth/auth.service';
 import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { UserNoManagerDatas } from './shared/services/service.user.component';
+
 
 
 @NgModule({
@@ -51,7 +53,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
