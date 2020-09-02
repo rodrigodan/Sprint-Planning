@@ -26,6 +26,7 @@ import { AuthService } from './auth/auth.service';
 import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.component';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserNoManagerDatas } from './shared/services/service.user.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -51,7 +52,8 @@ import { UserNoManagerDatas } from './shared/services/service.user.component';
     HomeModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    BrowserAnimationsModule
   ],
   providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { tap } from "rxjs/operators";
+import { tap, map } from "rxjs/operators";
 import { Subject, Observable } from "rxjs";
 // import { User } from "../user/user.model";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -37,6 +37,8 @@ class User{
 export class AuthService{
     user: Observable<firebase.User>;
     isLoggedIn: boolean = false;
+    realTimeDataUpdater = this.firestore.collection<any>("Sessions");
+
 
     constructor(
         private http: HttpClient, 
@@ -141,6 +143,22 @@ export class AuthService{
         this.userCommon.userType = 'commonUser'
         this.userCommon.sprintName = dataFromBaseSprint;
         this.router.navigate(['/meeting-place/' + url]);
+    }
+
+    updatedLoggeInPeople(hash): any{ 
+      
+        return this.realTimeDataUpdater.doc(hash).snapshotChanges().pipe(
+            map(
+                changes => { 
+                    console.log(changes);
+                    let data:any = changes.payload.data();
+                    let data2 = data.names.map(item => {
+                        return ({name: item});
+                    })
+                    return data2;
+            })
+        )
+
     }
 
 
