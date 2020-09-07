@@ -38,6 +38,7 @@ export class AuthService{
     user: Observable<firebase.User>;
     isLoggedIn: boolean = false;
     realTimeDataUpdater = this.firestore.collection<any>("Sessions");
+    idUser: number = 1;
 
 
     constructor(
@@ -118,17 +119,19 @@ export class AuthService{
 
         await docRef.get().toPromise().then(function(doc) {
             if (doc.exists) {
-                dataFromBase = doc.data().names;
+                dataFromBase = doc.data();
+                dataFromBase = dataFromBase.names;
                 dataFromBaseSprint = doc.data().sprintName;
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-
-        dataFromBase.push(employeeName);
+        
+        this.idUser = dataFromBase.length + 1; 
+        dataFromBase.push({name: employeeName, id: this.idUser});
 
         await docRef.update({
-                names: dataFromBase,
+                names: dataFromBase
             })
         .then(function() {
             console.log("Document successfully written!");
@@ -152,10 +155,12 @@ export class AuthService{
                 changes => { 
                     console.log(changes);
                     let data:any = changes.payload.data();
-                    let data2 = data.names.map(item => {
-                        return ({name: item});
-                    })
-                    return data2;
+                    return (data.names)
+                    // let data:any = changes.payload.data();
+                    // let data2 = data.names.map(item => {
+                    //     return ({name: item, id:data.id});
+                    // })
+                    // return data2;
             })
         )
 
