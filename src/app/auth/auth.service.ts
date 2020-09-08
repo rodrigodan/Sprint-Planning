@@ -145,6 +145,7 @@ export class AuthService{
         this.userCommon.userId = url;
         this.userCommon.userType = 'commonUser'
         this.userCommon.sprintName = dataFromBaseSprint;
+        this.userCommon.id = this.idUser;
         this.router.navigate(['/meeting-place/' + url]);
     }
 
@@ -156,14 +157,40 @@ export class AuthService{
                     console.log(changes);
                     let data:any = changes.payload.data();
                     return (data.names)
-                    // let data:any = changes.payload.data();
-                    // let data2 = data.names.map(item => {
-                    //     return ({name: item, id:data.id});
-                    // })
-                    // return data2;
             })
         )
 
+    }
+
+    async updateDevEstimation(employeeId, url,estimateValue){
+        let docRef =  this.firestore.collection("Sessions").doc(url);
+        let dataFromBase;
+        let dataFromBaseSprint;
+        let worked: boolean = true;
+        await docRef.get().toPromise().then(function(doc) {
+            if (doc.exists) {
+                dataFromBase = doc.data();
+                dataFromBase = dataFromBase.names;
+                dataFromBaseSprint = doc.data().sprintName;
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+        let temp = dataFromBase[employeeId-1];
+        dataFromBase[employeeId-1] = {name: temp.name, id: temp.id, estimation: estimateValue}
+
+        await docRef.update({
+                names: dataFromBase
+            })
+        .then(function() {
+            console.log("Document successfully written!");
+            worked = true;
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+            worked = false;
+        });
     }
 
 

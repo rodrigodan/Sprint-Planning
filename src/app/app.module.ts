@@ -27,6 +27,11 @@ import { LoadingSpinner } from './shared/loading-spinner/loading-spinner.compone
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserNoManagerDatas } from './shared/services/service.user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from '@angular/material/table';
+import {  MatDialogModule } from '@angular/material/dialog';
+import { TableBasicExample } from './temporary/temporary';
+
+// import {MatDialogModule} from "@angular/material";
 
 
 
@@ -41,7 +46,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LoginComponent,
     UserDataComponent,
     NewPlanningMeeting,
-    LoadingSpinner
+    LoadingSpinner,
+    TableBasicExample
   ],
   imports: [
     BrowserModule,
@@ -53,7 +59,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatTableModule
   ],
   providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas],
   bootstrap: [AppComponent]

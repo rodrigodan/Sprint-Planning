@@ -32,162 +32,82 @@
     </section>
   </div>
 
-  <div class="container" style="margin-top:50px;">
-    <table style="width:100%;" mat-table [dataSource]="people" class="mat-elevation-z8">
+  <div class = "container" style="margin-top:50px;">
+    <div class = "row">
+    <div class = "col-3">
+      <form (ngSubmit)="estimate(f)" #f="ngForm">
+        <div class="form-row">
+          <p style="color:#525F7F; font-weight: bold; font-size:16px;">Estimate:</p>
+          <div class="col-12 col-md-9 mb-2 mb-md-0">
+            <input
+              ngModel 
+              name="time"
+              required
+              type="text"
+              placeholder="5 hrs" 
+              class="form-control" >
+          </div>
+          <div class="col-12 col-md-3">
+            <button 
+              type="submit" 
+              class="btn btn-primary" 
+              style="background-color:#2DCE89; border-color: #2DCE89">
+                Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-    
-      <!-- Position Column -->
-      <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef> No. </th>
-        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-      </ng-container>
-    
-      <!-- Name Column -->
-      <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef> Name </th>
-        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-      </ng-container>
-    
-      <!-- Weight Column -->
-      <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef> Weight </th>
-        <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-      </ng-container>
-    
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef> Symbol </th>
-        <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
-      </ng-container>
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
+    <div class = "col-6">
+    </div>
+
+    <div class = "col-3">
+ 
+          
+
+    </div>
+
   </div>
+
+
+  </div>
+
+  <div class="container" style="margin-top:15px;">
+    <div class = "row">
+      
+        <div class = "col-12">
+          <div class = "float-right" style="margin-bottom: 15px;">
+            <a href="javascript:void(0)" class="btn btn-primary ">Show Estimates</a>
   
-      <!-- <div class="container">
-          
-          <div class="mb-4">
+        
+            <a href="javascript:void(0)" class="btn btn-primary" style="background-color:red; border-color: red;">Delete Estimates</a>
+
           </div>
-          <div class="row justify-content-between">
-            <div class="col-lg-3 col-md-6">
-                <div class="form-group">
-                    <p style="color:#525F7F; font-weight: bold; font-size:16px;">Estimate:</p>
-
-
-                    <input 
-                        type="text" 
-                        placeholder="Insert your time" 
-                        class="form-control" 
-                    />
-                
-                    <br />
-  
-  
-                
-                    
-                    <div class="d-flex 
-                        flex-column 
-                        align-items-end"
-                    >
-                        <button 
-                            type="button" 
-                            class="btn btn-primary" 
-                            style="background-color: #2DCE89; border-color: #2DCE89"
-                        >
-                            Submit
-                        </button>
-                    </div>
-                    <br />
-                    <p style="color:#525F7F; font-weight: bold; font-size:16px;">Metrics:</p>
-                    <div class="row">
-                      <div class="col-6">
-                        Average:
-                      </div>
-
-                      <div class="col-6">
-                          X
-                      </div>
-                    </div>
-
-                      <div class="row">
-                          <div class="col-6">
-                            Mode:
-                          </div>
-    
-                          <div class="col-6">
-                              X
-                          </div>
-                      </div>
-                    
-                </div>
-  
-            </div>
-
-            <div class="col-lg-7 col-md-6">
-          
-                  <div class="card card-lift--hover shadow border-0">
-                <div class="card-body py-1">
-                    <div class="row justify-content-end">
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4">Show Estimates</a>
-                    </div>
-                    <div class="row justify-content-end">
-                        <a href="javascript:void(0)" class="btn btn-primary mt-4" style="background-color:red; border-color: red;">Delete Estimates</a>
-                    </div>
-
-                  <br />
-
-
-
-
-                  <table class="table table-striped">
-                      <thead>
-                        <tr>
-                            <th scope="col">PARTICIPANTS</th>
-                            <th scope="col" style="text-align: center;">ESTIMATION</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">Rodrigo Gonçalves</th>
-                          <td style="text-align: center;">X</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Rafael</th>
-                          <td style="text-align: center;">X</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Lucas</th>
-                          <td style="text-align: center;">X</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Paulo</th>
-                          <td style="text-align: center;">X</td>
-                        </tr>
-                        <tr>
-                          <th scope="row">Eric</th>
-                          <td style="text-align: center;">X</td>
-                        </tr>
-                      </tbody>
-                    </table>
-
-                </div>
-              </div>
-            </div>
-            
-          </div>
-          <div class="row" style="margin-bottom: 2%;">
-              <div class="col-lg-12">
-                  <a href="javascript:void(0)" class="btn btn-primary mt-4" style="background-color:#FB6340; border-color:#FB6340;">Finish meeting</a>
-              </div>
-
-
-              
-              
-          </div>
-
-        </div> -->
-
+        <table style="width:100%;" mat-table [dataSource]="people" class="mat-elevation-z8">
+        
+          <!-- Position Column -->
+          <ng-container matColumnDef="position">
+            <th mat-header-cell *matHeaderCellDef> No. </th>
+            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+          </ng-container>
+        
+          <!-- Name Column -->
+          <ng-container matColumnDef="employee">
+            <th mat-header-cell *matHeaderCellDef> Emplyee </th>
+            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+          </ng-container>
+        
+          <!-- Weight Column -->
+          <ng-container matColumnDef="estimation">
+            <th mat-header-cell *matHeaderCellDef> Estimation </th>
+            <td mat-cell *matCellDef="let element"> {{element.estimation}} </td>
+          </ng-container>
+        
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        </div>
+    </div>
+  </div>
 </main>

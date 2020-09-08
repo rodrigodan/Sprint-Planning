@@ -4,4 +4,5 @@ export class UserNoManagerDatas{
     userName: string = ''; 
     userId: string = '';
     sprintName: string = '';
+    id: number;
 } 
