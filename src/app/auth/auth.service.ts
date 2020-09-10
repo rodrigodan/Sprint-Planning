@@ -156,7 +156,7 @@ export class AuthService{
                 changes => { 
                     console.log(changes);
                     let data:any = changes.payload.data();
-                    return (data.names)
+                    return (data)
             })
         )
 
@@ -194,6 +194,48 @@ export class AuthService{
     }
 
 
+    async alternateShowNotShowEstimatesForAll(notShowEstimates, url){
+        let docRef =  this.firestore.collection("Sessions").doc(url);
+        let temporary;
+        await docRef.update({
+            notShowEstimates: notShowEstimates
+        }).then(function() {
+            console.log("Document successfully written!");
+        })
+    }
+
+    async deleteAllEstimates(url){
+        let docRef =  this.firestore.collection("Sessions").doc(url);
+        let dataFromBase;
+        let dataFromBaseSprint;
+        let worked: boolean = true;
+        await docRef.get().toPromise().then(function(doc) {
+            if (doc.exists) {
+                dataFromBase = doc.data();
+                dataFromBase = dataFromBase.names;
+                dataFromBaseSprint = doc.data().sprintName;
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+
+        dataFromBase = dataFromBase.map(item =>{
+            return({name: item.name, id: item.id, estimation: ''})
+        })
+
+        await docRef.update({
+                names: dataFromBase
+            })
+        .then(function() {
+            console.log("Document successfully written!");
+            worked = true;
+        })
+        .catch(function(error) {
+            console.error("Error writing document: ", error);
+            worked = false;
+        });
+
+    }
 
     loginIsAuthenticated(){
         const promise = new Promise(

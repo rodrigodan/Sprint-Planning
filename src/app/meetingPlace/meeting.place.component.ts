@@ -20,6 +20,7 @@ export class MeetingPlace implements OnInit {
   sprintName: string = '';
   uId: number;
   hash: string;
+  notShowEstimates = true;
 
   constructor(private userCommon: UserNoManagerDatas, private authService: AuthService, private router: Router) { }
 
@@ -28,10 +29,14 @@ export class MeetingPlace implements OnInit {
     this.hash = this.router.url.substring(this.router.url.indexOf('user-employee/')+16, this.router.url.length);
     let id = 0;
     this.authService.updatedLoggeInPeople(this.hash).subscribe(params =>{
-      if(!params || params.length === 0) return ;
+      if(!params.names || params.names.length === 0) return ;
       id = id + 1;
-      this.uId = params.length + 1;
-      this.people = new MatTableDataSource(params);
+      this.uId = params.names.length + 1;
+      this.notShowEstimates = !params.notShowEstimates ? false: true;
+      if(params.notShowEstimates === undefined){
+        this.notShowEstimates = true;
+      }
+      this.people = new MatTableDataSource(params.names);
     });
 
   }
@@ -42,6 +47,15 @@ export class MeetingPlace implements OnInit {
     }
   const valueEstimate = signupForm.value.time;
   this.authService.updateDevEstimation(this.userCommon.id, this.hash, valueEstimate);
+  }
+
+  public alternateShowNotShowEstimates(){
+    this.notShowEstimates = !this.notShowEstimates;
+    this.authService.alternateShowNotShowEstimatesForAll(this.notShowEstimates,this.hash)
+  }
+
+  public deleteEstimates(){
+      this.authService.deleteAllEstimates(this.hash);
   }
 
 }
