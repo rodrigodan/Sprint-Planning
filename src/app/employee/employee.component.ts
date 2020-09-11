@@ -2,19 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
+import { EmployeeService } from './employee.service';
 
 @Component({
-    selector: 'app-profile',
-    templateUrl: './profile.component.html',
-    styleUrls: ['./profile.component.scss']
+    selector: 'employee',
+    templateUrl: './employee.component.html',
+    styleUrls: ['./employee.component.scss']
 })
 
-export class ProfileComponent implements OnInit {
+export class Employee implements OnInit {
 
     
     userNameInserted: boolean = true;
     
-    constructor(private authService: AuthService,  private router: Router) { }
+    constructor(
+        private authService: AuthService,  
+        private router: Router,
+        private employeeService: EmployeeService) { }
 
     onSubmit2(signupForm: NgForm){
         if(!signupForm.valid){
@@ -22,7 +26,7 @@ export class ProfileComponent implements OnInit {
         }
         const name = signupForm.value.name;
         const url = this.router.url.substring(this.router.url.indexOf('user-employee/')+14, this.router.url.length);
-        this.authService.newEmployee(name, url);
+        this.employeeService.newEmployee(name, url);
     }
 
     

@@ -7,8 +7,8 @@ import { AppRoutingModule } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
-import { MeetingPlace } from './meetingPlace/meeting.place.component';
-import { ProfileComponent } from './profile/profile.component';
+import { Session } from './session/session.component';
+import { Employee } from './employee/employee.component';
 import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
@@ -30,6 +30,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import {  MatDialogModule } from '@angular/material/dialog';
 import { TableBasicExample } from './temporary/temporary';
+import { SessionService } from './session/session.service';
+import { EmployeeService } from './employee/employee.service';
+import { NewPlanningService } from './planning/new.planning.service';
 
 // import {MatDialogModule} from "@angular/material";
 
@@ -39,8 +42,8 @@ import { TableBasicExample } from './temporary/temporary';
   declarations: [
     AppComponent,
     SignupComponent,
-    MeetingPlace,
-    ProfileComponent,
+    Session,
+    Employee,
     NavbarComponent,
     FooterComponent,
     LoginComponent,
@@ -63,7 +66,7 @@ import { TableBasicExample } from './temporary/temporary';
     MatDialogModule,
     MatTableModule
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

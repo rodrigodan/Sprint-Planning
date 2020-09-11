@@ -4,23 +4,25 @@ import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home/home.component';
-import { ProfileComponent } from './profile/profile.component';
+import { Employee } from './employee/employee.component';
 import { SignupComponent } from './signup/signup.component';
-import { MeetingPlace } from './meetingPlace/meeting.place.component';
+import { Session } from './session/session.component';
 import { LoginComponent } from './login/login.component';
 import { NewPlanningMeeting } from './planning/new.planning.component';
 import { AuthGuard } from './auth/auth.guards.service';
+import { TableBasicExample } from './temporary/temporary';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
-    { path: 'user-employee/:id',     component: ProfileComponent },
+    { path: 'user-employee/:id',     component: Employee },
     { path: 'register',           component: SignupComponent },
-    { path: 'meeting-place/:id',          component: MeetingPlace },
+    { path: 'meeting-place/:id',          component: Session },
     { path: 'login',          component: LoginComponent },
     { path: 'new-planning-meeting',          canActivate: [AuthGuard], component: NewPlanningMeeting },
 
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    {path: "**", redirectTo:"login"}
+    // {path: "**", redirectTo:"login"},
+    {path: "teste", component: TableBasicExample }
 ];
 
 @NgModule({

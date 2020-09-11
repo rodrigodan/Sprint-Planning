@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { UserNoManagerDatas } from '../shared/services/service.user.component';
+import { NewPlanningService } from './new.planning.service';
 
 
 @Component({
@@ -18,12 +19,16 @@ export class NewPlanningMeeting implements OnInit {
     hash: string = '';
     sprintName: string = '';
 
-    constructor(private authService: AuthService, private router: Router, private userCommon: UserNoManagerDatas) { }
+    constructor(
+        private authService: AuthService, 
+        private router: Router, 
+        private userCommon: UserNoManagerDatas,
+        private newPlanningService: NewPlanningService) { }
 
     onSubmit(f: NgForm){
         this.loadedLink = false;
         this.sprintName = f.value.sprint;
-        this.authService.newMeetingPlanning(this.sprintName)
+        this.newPlanningService.newMeetingPlanning(this.sprintName)
         .then(value =>{
             // this.router.navigate(['/meeting-place']);
             console.log('entered here!');

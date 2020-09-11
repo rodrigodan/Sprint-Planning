@@ -5,14 +5,15 @@ import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
+import { SessionService } from './session.service';
 
 @Component({
-    selector: 'app-meeting-place',
-    templateUrl: './meeting.place.component.html',
-    styleUrls: ['./meeting.place.component.scss']
+    selector: 'session',
+    templateUrl: './session.component.html',
+    styleUrls: ['./session.component.scss']
 })
 
-export class MeetingPlace implements OnInit {
+export class Session implements OnInit {
   displayedColumns: string[] = ['position', 'employee', 'estimation'];
 
   people: MatTableDataSource<any>;
@@ -22,21 +23,26 @@ export class MeetingPlace implements OnInit {
   hash: string;
   notShowEstimates = true;
 
-  constructor(private userCommon: UserNoManagerDatas, private authService: AuthService, private router: Router) { }
+  constructor(
+    private userCommon: UserNoManagerDatas, 
+    private authService: AuthService, 
+    private router: Router,
+    private session: SessionService) { }
 
   ngOnInit() {
     this.sprintName = this.userCommon.sprintName;
     this.hash = this.router.url.substring(this.router.url.indexOf('user-employee/')+16, this.router.url.length);
     let id = 0;
-    this.authService.updatedLoggeInPeople(this.hash).subscribe(params =>{
-      if(!params.names || params.names.length === 0) return ;
+    this.session.updatedLoggeInPeople(this.hash).subscribe(params =>{
+      if(!params.employees || params.employees.length === 0) return ;
       id = id + 1;
-      this.uId = params.names.length + 1;
+
+      this.uId = params.employees? params.employees.length + 1:1;
       this.notShowEstimates = !params.notShowEstimates ? false: true;
       if(params.notShowEstimates === undefined){
         this.notShowEstimates = true;
       }
-      this.people = new MatTableDataSource(params.names);
+      this.people = new MatTableDataSource(params.employees);
     });
 
   }
@@ -46,16 +52,16 @@ export class MeetingPlace implements OnInit {
       return ;
     }
   const valueEstimate = signupForm.value.time;
-  this.authService.updateDevEstimation(this.userCommon.id, this.hash, valueEstimate);
+  this.session.updateDevEstimation(this.userCommon.id, this.hash, valueEstimate);
   }
 
   public alternateShowNotShowEstimates(){
     this.notShowEstimates = !this.notShowEstimates;
-    this.authService.alternateShowNotShowEstimatesForAll(this.notShowEstimates,this.hash)
+    this.session.alternateShowNotShowEstimatesForAll(this.notShowEstimates,this.hash)
   }
 
   public deleteEstimates(){
-      this.authService.deleteAllEstimates(this.hash);
+    this.session.deleteAllEstimates(this.hash);
   }
 
 }
