@@ -31,7 +31,7 @@ export class Session implements OnInit {
 
   ngOnInit() {
     this.sprintName = this.userCommon.sprintName;
-    this.hash = this.router.url.substring(this.router.url.indexOf('user-employee/')+16, this.router.url.length);
+    this.hash = this.router.url.substring(this.router.url.indexOf('user-employee/')+18, this.router.url.length);
     let id = 0;
     this.session.updatedLoggeInPeople(this.hash).subscribe(params =>{
       if(!params.employees || params.employees.length === 0) return ;

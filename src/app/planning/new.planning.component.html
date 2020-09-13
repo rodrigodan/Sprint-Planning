@@ -1,6 +1,6 @@
 <main class="profile-page">
 
-    <section style=" position: absolute; width: 100%; height: 100vh; padding: 50vh;" *ngIf="!loadedLink || !loadedMeetingPlacePage" class="section section-shaped section-lg">
+    <section style=" position: absolute; width: 100%; height: 100vh; padding: 50vh;" *ngIf="!newModelNewPlanning.loadedLink || !newModelNewPlanning.loadedMeetingPlacePage" class="section section-shaped section-lg">
         <div class="row justify-content-center">
             <div class="d-flex align-items-center">
                 <app-loading-spinner></app-loading-spinner>
@@ -9,7 +9,7 @@
     </section>
 
     <section
-    *ngIf="loadedLink"
+    *ngIf="newModelNewPlanning.loadedLink"
     class="section" 
     style="width:100%; 
         height: 100vh; 
@@ -59,11 +59,11 @@
         </div>
     </div>
 
-    <div *ngIf="loadedMeetingPlacePage" class="d-flex justify-content-center">
+    <div *ngIf="newModelNewPlanning.loadedMeetingPlacePage" class="d-flex justify-content-center">
 
-            <div *ngIf="session">
+            <div *ngIf="newModelNewPlanning.session">
                 <p style="text-align: center;">Share with the Emplyees:</p>
-                {{session}}
+                {{newModelNewPlanning.session}}
                 <br />
                 <br />
 

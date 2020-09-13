@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { UserNoManagerDatas } from '../shared/services/service.user.component';
 import { NewPlanningService } from './new.planning.service';
+import { NewModelPlanning } from './new.planning.model';
 
 
 @Component({
@@ -12,39 +13,21 @@ import { NewPlanningService } from './new.planning.service';
 })
 
 export class NewPlanningMeeting implements OnInit {
-    
-    session: string = '';
-    loadedLink: boolean = true;
-    loadedMeetingPlacePage: boolean = true;
-    hash: string = '';
-    sprintName: string = '';
+
+    public newModelNewPlanning: NewModelPlanning = new NewModelPlanning();
 
     constructor(
-        private authService: AuthService, 
-        private router: Router, 
-        private userCommon: UserNoManagerDatas,
         private newPlanningService: NewPlanningService) { }
 
     onSubmit(f: NgForm){
-        this.loadedLink = false;
-        this.sprintName = f.value.sprint;
-        this.newPlanningService.newMeetingPlanning(this.sprintName)
-        .then(value =>{
-            // this.router.navigate(['/meeting-place']);
-            console.log('entered here!');
-            this.session = "http://localhost:4200/" + 'user-employee/' + value.id;
-            this.hash = value.id;
-            this.loadedLink = true;
-        });
+        this.newModelNewPlanning.loadedLink = false;
+        this.newModelNewPlanning.sprintName = f.value.sprint;
+        this.newPlanningService.newMeetingPlanning(this.newModelNewPlanning)
+
     }
 
     statMeetingSession(){
-        this.loadedMeetingPlacePage = false;
-        this.router.navigate(['/meeting-place/' + this.hash]);
-        this.userCommon.userId = this.hash;
-        this.loadedMeetingPlacePage = true;
-        this.userCommon.userType = 'userManager';
-        this.userCommon.sprintName = this.sprintName;
+        this.newPlanningService.statMeetingSessionService(this.newModelNewPlanning);
     }
 
     ngOnInit() {}

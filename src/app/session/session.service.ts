@@ -5,6 +5,7 @@ import { Router } from "@angular/router";
 import { UserNoManagerDatas } from "../shared/services/service.user.component";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
+import { UpdateDataRepo2 } from "../shared/repositories/update.repo2.service";
 
 
 @Injectable()
@@ -13,29 +14,14 @@ export class SessionService{
 
     constructor(
 
-        private firestore: AngularFirestore) {
+        private firestore: AngularFirestore,
+        private updateDataRepo1: UpdateDataRepo2) {
         // this.user = firebaseAuth.authState;
-    }
-    newMeetingPlanning(sprintName: String): any{
-        let sprint:Object = {
-            employees:[],
-            sprintName: sprintName
-        }
-        return (this.firestore
-        .collection("Sessions")
-        .add(sprint))
     }
 
     updatedLoggeInPeople(hash): any{ 
-      
-        return this.realTimeDataUpdater.doc(hash).snapshotChanges().pipe(
-            map(
-                changes => { 
-                    console.log(changes);
-                    let data:any = changes.payload.data();
-                    return (data)
-            })
-        )
+
+        return this.updateDataRepo1.updateDataRepo2(hash);
 
     }
 

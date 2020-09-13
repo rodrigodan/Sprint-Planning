@@ -33,6 +33,8 @@ import { TableBasicExample } from './temporary/temporary';
 import { SessionService } from './session/session.service';
 import { EmployeeService } from './employee/employee.service';
 import { NewPlanningService } from './planning/new.planning.service';
+import { CreateDataRepo1 } from './shared/repositories/create.repo1.service';
+import { UpdateDataRepo2 } from './shared/repositories/update.repo2.service';
 
 // import {MatDialogModule} from "@angular/material";
 
@@ -66,7 +68,7 @@ import { NewPlanningService } from './planning/new.planning.service';
     MatDialogModule,
     MatTableModule
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, UpdateDataRepo2],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

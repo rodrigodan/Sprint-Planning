@@ -53,7 +53,7 @@ export class EmployeeService{
         this.userCommon.userType = 'commonUser'
         this.userCommon.sprintName = dataFromBaseSprint;
         this.userCommon.id = this.idUser;
-        this.router.navigate(['/meeting-place/' + url]);
+        this.router.navigate(['/meeting-session/' + url]);
     }
 
 }

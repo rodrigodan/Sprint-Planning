@@ -16,7 +16,7 @@ const routes: Routes =[
     { path: 'home',             component: HomeComponent },
     { path: 'user-employee/:id',     component: Employee },
     { path: 'register',           component: SignupComponent },
-    { path: 'meeting-place/:id',          component: Session },
+    { path: 'meeting-session/:id',          component: Session },
     { path: 'login',          component: LoginComponent },
     { path: 'new-planning-meeting',          canActivate: [AuthGuard], component: NewPlanningMeeting },
 
