@@ -18,7 +18,7 @@
           <div class="row justify-content-between">
             <div class="col-lg-12">
               <h1 class="display-3  text-white" style="text-align: center;">
-                <span style="text-align: center;">Welcome to the {{ sprintName }}</span>
+                <span style="text-align: center;">Welcome to the {{ sessionModel.sprintName }}</span>
                 <span>A great way to get started planning your sprint</span>
               </h1>
             </div>
@@ -78,19 +78,15 @@
     <div class = "row">
         <div class = "col-12">
           <div *ngIf="userCommon.userType === 'userManager' " class = "float-right" style="margin-bottom: 15px;">
-            <a href="javascript:void(0)" class="btn btn-primary" (click)="alternateShowNotShowEstimates()"> {{notShowEstimates ? 'Show Estimations' : 'Hide Estimations'}}</a>
+            <a href="javascript:void(0)" class="btn btn-primary" (click)="alternateShowNotShowEstimates()"> {{sessionModel.notShowEstimates ? 'Show Estimations' : 'Hide Estimations'}}</a>
   
         
             <a href="javascript:void(0)" class="btn btn-primary" (click)="deleteEstimates()" style="background-color:red; border-color: red;">Delete Estimates</a>
 
           </div>
-        <table style="width:100%;" mat-table [dataSource]="people" class="mat-elevation-z8">
+        <table style="width:100%;" mat-table [dataSource]="sessionModel.people" class="mat-elevation-z8">
         
-          <!-- Position Column -->
-          <ng-container matColumnDef="position">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-          </ng-container>
+  
         
           <!-- Name Column -->
           <ng-container matColumnDef="employee">
@@ -101,11 +97,11 @@
           <!-- Weight Column -->
           <ng-container matColumnDef="estimation">
             <th mat-header-cell *matHeaderCellDef> Estimation </th>
-            <td mat-cell *matCellDef="let element"> {{ notShowEstimates && element.estimation ? 'X' : element.estimation }} </td>
+            <td mat-cell *matCellDef="let element"> {{ sessionModel.notShowEstimates && element.estimation ? 'X' : element.estimation }} </td>
           </ng-container>
         
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <tr mat-header-row *matHeaderRowDef="sessionModel.displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: sessionModel.displayedColumns;"></tr>
         </table>
         </div>
     </div>

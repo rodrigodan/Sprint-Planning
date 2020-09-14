@@ -3,6 +3,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { UserNoManagerDatas } from "../shared/services/service.user.component";
 import { Router } from "@angular/router";
 
+import { Component } from '@angular/core';
+import { v4 as uuidv4 } from 'uuid';
+import { ReadDataRepo4 } from "../shared/repositories/read.repo4.service";
+
+
 
 @Injectable()
 export class EmployeeService{
@@ -12,13 +17,22 @@ export class EmployeeService{
 
         private firestore: AngularFirestore,
         private userCommon: UserNoManagerDatas,
-        private router: Router) {
+        private router: Router,
+        private readRepo4: ReadDataRepo4) {
         // this.user = firebaseAuth.authState;
     }
 
-    async newEmployee(employeeName: string, url: string){
+    async newEmployee(userCommon: UserNoManagerDatas){
 
-        let docRef =  this.firestore.collection("Sessions").doc(url);
+        userCommon.url = this.router.url.substring(this.router.url.indexOf('user-employee/')+14, this.router.url.length);
+        this.userCommon.id = this.userCommon.userIdGenerator();
+
+        // let {dataFromBase, dataFromBaseSprint} = await this.readRepo4.readDataRepo4(userCommon.url, userCommon);
+
+        // dataFromBase.push({name: userCommon.userName, id: userCommon.id});
+
+
+        let docRef =  this.firestore.collection("Sessions").doc(userCommon.url);
         let dataFromBase;
         let dataFromBaseSprint;
         let worked: boolean = true;
@@ -32,10 +46,8 @@ export class EmployeeService{
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-        
-        this.idUser = dataFromBase? dataFromBase.length + 1: 1; 
         dataFromBase = !dataFromBase?[]:dataFromBase; 
-        dataFromBase.push({name: employeeName, id: this.idUser});
+        dataFromBase.push({name: userCommon.userName, id: this.userCommon.id});
 
         await docRef.update({
                 employees: dataFromBase
@@ -48,12 +60,11 @@ export class EmployeeService{
             console.error("Error writing document: ", error);
             worked = false;
         });
-        this.userCommon.userName = employeeName;
-        this.userCommon.userId = url;
+        this.userCommon.url = userCommon.url;
         this.userCommon.userType = 'commonUser'
         this.userCommon.sprintName = dataFromBaseSprint;
-        this.userCommon.id = this.idUser;
-        this.router.navigate(['/meeting-session/' + url]);
+        // this.userCommon.id = this.idUser;
+        this.router.navigate(['/meeting-session/' + userCommon.url]);
     }
 
 }

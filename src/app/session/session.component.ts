@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { SessionService } from './session.service';
+import { SessionModel } from './session.model';
 
 @Component({
     selector: 'session',
@@ -14,54 +15,44 @@ import { SessionService } from './session.service';
 })
 
 export class Session implements OnInit {
-  displayedColumns: string[] = ['position', 'employee', 'estimation'];
 
-  people: MatTableDataSource<any>;
-  userDev: string = '';
-  sprintName: string = '';
-  uId: number;
-  hash: string;
-  notShowEstimates = true;
+  public sessionModel: SessionModel = new SessionModel();
+
+  // displayedColumns: string[] = ['position', 'employee', 'estimation'];
+
+  // people: MatTableDataSource<any>;
+  // userDev: string = '';
+  // sprintName: string = '';
+  // uId: number;
+  // hash: string;
+  // notShowEstimates = true;
 
   constructor(
     private userCommon: UserNoManagerDatas, 
-    private authService: AuthService, 
     private router: Router,
     private session: SessionService) { }
 
   ngOnInit() {
-    this.sprintName = this.userCommon.sprintName;
-    this.hash = this.router.url.substring(this.router.url.indexOf('user-employee/')+18, this.router.url.length);
-    let id = 0;
-    this.session.updatedLoggeInPeople(this.hash).subscribe(params =>{
-      if(!params.employees || params.employees.length === 0) return ;
-      id = id + 1;
-
-      this.uId = params.employees? params.employees.length + 1:1;
-      this.notShowEstimates = !params.notShowEstimates ? false: true;
-      if(params.notShowEstimates === undefined){
-        this.notShowEstimates = true;
-      }
-      this.people = new MatTableDataSource(params.employees);
-    });
-
+    this.sessionModel.sprintName = this.userCommon.sprintName;
+    this.sessionModel.uId = this.userCommon.id;
+    this.session.readLoggeInPeopleAndDataChanges(this.sessionModel);
   }
 
   public estimate(signupForm: NgForm){
     if(!signupForm.valid){
       return ;
     }
-  const valueEstimate = signupForm.value.time;
-  this.session.updateDevEstimation(this.userCommon.id, this.hash, valueEstimate);
+    this.sessionModel.valueEstimate = signupForm.value.time;
+    this.session.updateDevEstimation(this.userCommon.id, this.sessionModel);
   }
 
   public alternateShowNotShowEstimates(){
-    this.notShowEstimates = !this.notShowEstimates;
-    this.session.alternateShowNotShowEstimatesForAll(this.notShowEstimates,this.hash)
+    this.sessionModel.notShowEstimates = !this.sessionModel.notShowEstimates;
+    this.session.alternateShowNotShowEstimatesForAll(this.sessionModel.notShowEstimates,this.sessionModel.hash)
   }
 
   public deleteEstimates(){
-    this.session.deleteAllEstimates(this.hash);
+    this.session.deleteAllEstimates(this.sessionModel.hash);
   }
 
 }

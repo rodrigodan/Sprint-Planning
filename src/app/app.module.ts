@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule, Router } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 
+
 import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { Session } from './session/session.component';
@@ -34,7 +35,12 @@ import { SessionService } from './session/session.service';
 import { EmployeeService } from './employee/employee.service';
 import { NewPlanningService } from './planning/new.planning.service';
 import { CreateDataRepo1 } from './shared/repositories/create.repo1.service';
-import { UpdateDataRepo2 } from './shared/repositories/update.repo2.service';
+import { ReadDataRepo2 } from './shared/repositories/read.repo2.service';
+import { UpdateDataRepo3 } from './shared/repositories/update.repo3.service';
+import { ReadDataRepo4 } from './shared/repositories/read.repo4.service';
+
+
+
 
 // import {MatDialogModule} from "@angular/material";
 
@@ -66,9 +72,9 @@ import { UpdateDataRepo2 } from './shared/repositories/update.repo2.service';
     AngularFireAuthModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    MatTableModule
+    MatTableModule,
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, UpdateDataRepo2],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, ReadDataRepo2, UpdateDataRepo3, ReadDataRepo4],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

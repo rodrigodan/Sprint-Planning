@@ -24,7 +24,7 @@ export class NewPlanningService{
     statMeetingSessionService(newModelNewPlanning: NewModelPlanning){
         newModelNewPlanning.loadedMeetingPlacePage = false;
         this.router.navigate(['/meeting-session/' + newModelNewPlanning.hash]);
-        this.userCommon.userId = newModelNewPlanning.hash;
+        this.userCommon.url = newModelNewPlanning.hash;
         newModelNewPlanning.loadedMeetingPlacePage = true;
         this.userCommon.userType = 'userManager';
         this.userCommon.sprintName = newModelNewPlanning.sprintName;

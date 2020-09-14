@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { Router } from '@angular/router';
 import { EmployeeService } from './employee.service';
+import { UserNoManagerDatas } from '../shared/services/service.user.component';
 
 @Component({
     selector: 'employee',
@@ -11,26 +12,28 @@ import { EmployeeService } from './employee.service';
 })
 
 export class Employee implements OnInit {
-
-    
-    userNameInserted: boolean = true;
     
     constructor(
         private authService: AuthService,  
         private router: Router,
-        private employeeService: EmployeeService) { }
+        private employeeService: EmployeeService,
+        private userCommon: UserNoManagerDatas) { }
+
+
+    ngOnInit() {
+        
+    }
 
     onSubmit2(signupForm: NgForm){
         if(!signupForm.valid){
             return ;
         }
-        const name = signupForm.value.name;
-        const url = this.router.url.substring(this.router.url.indexOf('user-employee/')+14, this.router.url.length);
-        this.employeeService.newEmployee(name, url);
+        this.userCommon.userName = signupForm.value.name;
+        this.employeeService.newEmployee(this.userCommon);
     }
 
     
 
-    ngOnInit() {}
+  
 
 }

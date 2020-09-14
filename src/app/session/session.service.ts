@@ -5,7 +5,9 @@ import { Router } from "@angular/router";
 import { UserNoManagerDatas } from "../shared/services/service.user.component";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from "rxjs/operators";
-import { UpdateDataRepo2 } from "../shared/repositories/update.repo2.service";
+import { ReadDataRepo2 } from "../shared/repositories/read.repo2.service";
+import { SessionModel } from "./session.model";
+import { UpdateDataRepo3 } from "../shared/repositories/update.repo3.service";
 
 
 @Injectable()
@@ -15,18 +17,23 @@ export class SessionService{
     constructor(
 
         private firestore: AngularFirestore,
-        private updateDataRepo1: UpdateDataRepo2) {
+        private readRepo2: ReadDataRepo2,
+        private updateRepo3: UpdateDataRepo3,
+        private router: Router) {
         // this.user = firebaseAuth.authState;
     }
 
-    updatedLoggeInPeople(hash): any{ 
-
-        return this.updateDataRepo1.updateDataRepo2(hash);
-
+    readLoggeInPeopleAndDataChanges(sessionModel: SessionModel){ 
+        sessionModel.hash = this.router.url.substring(this.router.url.indexOf('user-employee/')+18, this.router.url.length);
+        this.readRepo2.readDataRepo2(sessionModel.hash,sessionModel);
     }
 
-    async updateDevEstimation(employeeId, url,estimateValue){
-        let docRef =  this.firestore.collection("Sessions").doc(url);
+    async updateDevEstimation(employeeId: any, sessionModel: SessionModel){
+        sessionModel.uId;
+        sessionModel.hash;
+        // employeeId, url,estimateValue
+        // this.updateRepo3.updateDataRepo3()
+        let docRef =  this.firestore.collection("Sessions").doc(sessionModel.hash);
         let dataFromBase;
         let dataFromBaseSprint;
         let worked: boolean = true;
@@ -39,9 +46,13 @@ export class SessionService{
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
-
-        let temp = dataFromBase[employeeId-1];
-        dataFromBase[employeeId-1] = {name: temp.name, id: temp.id, estimation: estimateValue}
+        let position;
+        dataFromBase.forEach((element,index) => {
+            if(element.id === employeeId){
+                position = index;
+            }
+        });
+        dataFromBase[position].estimation = sessionModel.valueEstimate;
 
         await docRef.update({
                 employees: dataFromBase

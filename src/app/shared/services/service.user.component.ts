@@ -1,8 +1,13 @@
 
+import { v4 as uuidv4 } from 'uuid';
 export class UserNoManagerDatas{
     userType: string = '';
     userName: string = ''; 
-    userId: string = '';
+    url: string = ''; //url
     sprintName: string = '';
-    id: number;
+    id: string;
+
+    public userIdGenerator():string{
+        return uuidv4()
+    }
 } 
