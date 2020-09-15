@@ -9,22 +9,22 @@ export class ReadDataRepo4 {
     constructor(
         private firestore: AngularFirestore) {
     }
-    readDataRepo4(req: any, userCommon: UserNoManagerDatas): any{
+    async readDataRepo4(req: any, userCommon: UserNoManagerDatas){
         let docRef =  this.firestore.collection("Sessions").doc(userCommon.url);
         let dataFromBase;
         let dataFromBaseSprint;
 
-        docRef.get().toPromise().then(function(doc) {
+        await docRef.get().toPromise().then(function(doc) {
             if (doc.exists) {
                 dataFromBase = doc.data();
                 dataFromBase = dataFromBase.employees;
                 dataFromBaseSprint = doc.data().sprintName;
-                dataFromBase = !dataFromBase?[]:dataFromBase; 
-                return {dataFromBase, dataFromBaseSprint};
             }
         }).catch(function(error) {
             console.log("Error getting document:", error);
         });
+
+        return {dataFromBase, dataFromBaseSprint};
 
     }
 

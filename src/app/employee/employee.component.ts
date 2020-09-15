@@ -14,8 +14,6 @@ import { UserNoManagerDatas } from '../shared/services/service.user.component';
 export class Employee implements OnInit {
     
     constructor(
-        private authService: AuthService,  
-        private router: Router,
         private employeeService: EmployeeService,
         private userCommon: UserNoManagerDatas) { }
 
