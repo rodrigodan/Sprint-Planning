@@ -7,6 +7,8 @@ import { Component } from '@angular/core';
 import { v4 as uuidv4 } from 'uuid';
 import { ReadDataRepo4 } from "../shared/repositories/read.repo4.service";
 import { UpdateDataRepo5 } from '../shared/repositories/update.repo5.service';
+import { ReadDataRepo10 } from "../shared/repositories/read.repo10.service";
+import { NewModelEmployee } from "./employee.model";
 
 
 
@@ -18,7 +20,8 @@ export class EmployeeService{
         private userCommon: UserNoManagerDatas,
         private router: Router,
         private readRepo4: ReadDataRepo4,
-        private updateRepo5: UpdateDataRepo5) {
+        private updateRepo5: UpdateDataRepo5,
+        private readRepo10: ReadDataRepo10) {
         // this.user = firebaseAuth.authState;
     }
 
@@ -37,6 +40,13 @@ export class EmployeeService{
         this.userCommon.userType = 'commonUser'
         this.userCommon.sprintName = dataFromBaseSprint;
         this.router.navigate(['/meeting-session/' + userCommon.url]);
+    }
+
+    async validitOfAHashMeeting(userCommon: UserNoManagerDatas, modelEmployee: NewModelEmployee){
+        userCommon.url = this.router.url.substring(this.router.url.indexOf('user-employee/')+14, this.router.url.length);
+        let validVerify: boolean = await this.readRepo10.readDataRepo10(userCommon.url, userCommon.url);
+        modelEmployee.validityVerify = validVerify;
+       
     }
 
 }

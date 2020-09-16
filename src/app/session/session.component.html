@@ -1,5 +1,23 @@
 <main>
-  <div class="position-relative">
+
+
+  <section 
+  *ngIf="userCommon.sprintName === ''"
+  class="section" 
+  style="width:100%; 
+      height: 100vh; 
+      padding: 40vh"
+  >
+    <div class="d-flex justify-content-center">
+        <div class="d-flex align-items-center">
+            <h2 style="text-align: center;">404 Error
+            <br>Sorry, there is a problem.
+            <br>This page does not exist!</h2>
+        </div>
+    </div>
+  </section>
+
+  <div class="position-relative" *ngIf="userCommon.sprintName !== ''">
     <!-- shape Hero -->
     <section class="section section-lg section-shaped pb-3">
       <div class="shape shape-default">

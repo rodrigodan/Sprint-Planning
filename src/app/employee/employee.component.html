@@ -1,7 +1,31 @@
 <main class="profile-page">
 
+    <section style=" position: absolute; width: 100%; height: 100vh; padding: 50vh;" *ngIf="!modelEmployee.validityVerifyTemp" class="section section-shaped section-lg">
+        <div class="row justify-content-center">
+            <div class="d-flex align-items-center">
+                <app-loading-spinner></app-loading-spinner>
+            </div>
+        </div>
+    </section>
+
+    <section 
+        *ngIf="!modelEmployee.validityVerify && modelEmployee.validityVerifyTemp"
+        class="section" 
+        style="width:100%; 
+            height: 100vh; 
+            padding: 40vh"
+    >
+        <div class="d-flex justify-content-center">
+            <div class="d-flex align-items-center">
+                <h2 style="text-align: center;">404 Error
+                <br>Sorry, there is a problem.
+                <br>This page does not exist!</h2>
+            </div>
+        </div>
+    </section>
 
 <section
+*ngIf="modelEmployee.validityVerify && modelEmployee.validityVerifyTemp"
 class="section" 
 style="width:100%; 
       height: 100vh; 
