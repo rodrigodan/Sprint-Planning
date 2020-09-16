@@ -1,18 +1,14 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionModel } from "src/app/session/session.model";
-
-
 @Injectable()
-export class UpdateDataRepo3 {
+export class DeleteDataRepo9 {
     realTimeDataUpdater = this.firestore.collection<any>("Sessions");
     constructor(
         private firestore: AngularFirestore) {
     }
-    async updateDataRepo3(req: any,sessionModel: SessionModel){
-
-        let docRef =  this.firestore.collection("Sessions").doc(sessionModel.hash);
-
+    async deleteDataRepo9(req: any, url){
+        let docRef =  this.firestore.collection("Sessions").doc(url);
         await docRef.update({
             employees: req
         })
@@ -22,6 +18,6 @@ export class UpdateDataRepo3 {
         .catch(function(error) {
             console.error("Error writing document: ", error);
         });
-        
     }
+
 }

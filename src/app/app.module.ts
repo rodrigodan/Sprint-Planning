@@ -39,6 +39,10 @@ import { ReadDataRepo2 } from './shared/repositories/read.repo2.service';
 import { UpdateDataRepo3 } from './shared/repositories/update.repo3.service';
 import { ReadDataRepo4 } from './shared/repositories/read.repo4.service';
 import { UpdateDataRepo5 } from './shared/repositories/update.repo5.service';
+import { ReadDataRepo6 } from './shared/repositories/read.repo6.service';
+import { UpdateDataRepo7 } from './shared/repositories/update.repo7.service';
+import { ReadDataRepo8 } from './shared/repositories/read.repo8.service';
+import { DeleteDataRepo9 } from './shared/repositories/delete.repo9.service';
 
 
 
@@ -75,7 +79,7 @@ import { UpdateDataRepo5 } from './shared/repositories/update.repo5.service';
     MatDialogModule,
     MatTableModule,
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, ReadDataRepo2, UpdateDataRepo3, ReadDataRepo4, UpdateDataRepo5],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, ReadDataRepo2, UpdateDataRepo3, ReadDataRepo4, UpdateDataRepo5, ReadDataRepo6, UpdateDataRepo7,ReadDataRepo8,DeleteDataRepo9],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
