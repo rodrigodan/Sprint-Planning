@@ -7,6 +7,8 @@ import {MatTableModule, MatTableDataSource} from '@angular/material/table';
 import { NgForm } from '@angular/forms';
 import { SessionService } from './session.service';
 import { SessionModel } from './session.model';
+import {MatRadioModule} from '@angular/material/radio';
+
 
 @Component({
     selector: 'session',
@@ -17,6 +19,8 @@ import { SessionModel } from './session.model';
 export class Session implements OnInit {
 
   public sessionModel: SessionModel = new SessionModel();
+  public radioButton = '';
+  public teste = 'teste';
 
   // displayedColumns: string[] = ['position', 'employee', 'estimation'];
 
@@ -53,6 +57,22 @@ export class Session implements OnInit {
 
   public deleteEstimates(){
     this.session.deleteAllEstimates(this.sessionModel.hash);
+  }
+
+  public onRadioButtonClick(){
+    console.log(this.radioButton);
+    if(this.radioButton !== ''){
+      this.radioButton = ''
+      this.teste = '';
+
+    }
+    else{
+      this.teste = 'teste';
+    }
+  }
+
+  public outlierEstimation(){
+
   }
 
 }

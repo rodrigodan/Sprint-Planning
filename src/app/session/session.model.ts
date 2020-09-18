@@ -11,4 +11,5 @@ export class SessionModel{
     hash: string;
     notShowEstimates = true;
     valueEstimate;
+    lowestValue: boolean = true;
 }
