@@ -21,6 +21,7 @@ export class Session implements OnInit {
   public sessionModel: SessionModel = new SessionModel();
   public radioButton = '';
   public teste = 'teste';
+  public teste2 = true;
 
   // displayedColumns: string[] = ['position', 'employee', 'estimation'];
 
@@ -63,11 +64,6 @@ export class Session implements OnInit {
     console.log(this.radioButton);
     if(this.radioButton !== ''){
       this.radioButton = ''
-      this.teste = '';
-
-    }
-    else{
-      this.teste = 'teste';
     }
   }
 

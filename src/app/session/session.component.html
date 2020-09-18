@@ -99,7 +99,7 @@
             <!-- <a href="javascript:void(0)" class="btn btn-primary" (click)="alternateShowNotShowEstimates()"> {{sessionModel.notShowEstimates ? 'Show Estimations' : 'Hide Estimations'}}</a> -->
             <div class="custom-control custom-radio">
               <input (click)="onRadioButtonClick()" [(ngModel)]="radioButton" id="male" type="radio" class="custom-control-input" value="male" name="gender" ngModel>
-              <label class="custom-control-label" for="male">Male</label>
+              <label class="custom-control-label" for="male">Outliers</label>
            </div>
           </div>
           <div *ngIf="userCommon.userType === 'userManager' " class = "float-right" style="margin-bottom: 15px;">
@@ -116,19 +116,21 @@
           <!-- Name Column -->
           <ng-container matColumnDef="employee">
             <th mat-header-cell *matHeaderCellDef> Emplyee </th>
-            <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            <td mat-cell *matCellDef="let element" [ngClass]="radioButton == 'male' && !sessionModel.notShowEstimates && (element.estimation == sessionModel.smallestValue || element.estimation == sessionModel.greatestValue) ? teste :  ''"> {{element.name}} </td>
           </ng-container>
         
           <!-- Weight Column -->
           <ng-container matColumnDef="estimation">
             <th mat-header-cell *matHeaderCellDef> Estimation in hours </th>
-            <td mat-cell *matCellDef="let element"> {{ sessionModel.notShowEstimates && element.estimation ? 'X' : element.estimation }} </td>
+            <td mat-cell *matCellDef="let element" [ngClass]="radioButton == 'male' && !sessionModel.notShowEstimates && (element.estimation == sessionModel.smallestValue || element.estimation == sessionModel.greatestValue) ? teste :  ''"> {{ sessionModel.notShowEstimates && element.estimation ? 'X' : element.estimation }} </td>
           </ng-container>
         
           <tr mat-header-row *matHeaderRowDef="sessionModel.displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: sessionModel.displayedColumns;" [ngClass]= "teste"></tr>
+          <tr mat-row *matRowDef="let row; columns: sessionModel.displayedColumns;" [ngClass]= "row.estimation === 10 ? teste : ''"></tr>
         </table>
+
         </div>
+        
     </div>
   </div>
 </main>
