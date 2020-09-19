@@ -30,7 +30,7 @@ import { UserNoManagerDatas } from './shared/services/service.user.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from '@angular/material/table';
 import {  MatDialogModule } from '@angular/material/dialog';
-import { TableBasicExample } from './temporary/temporary';
+// import { TableBasicExample } from './temporary/temporary';
 import { SessionService } from './session/session.service';
 import { EmployeeService } from './employee/employee.service';
 import { NewPlanningService } from './planning/new.planning.service';
@@ -64,7 +64,6 @@ import { ReadDataRepo10 } from './shared/repositories/read.repo10.service';
     UserDataComponent,
     NewPlanningMeeting,
     LoadingSpinner,
-    TableBasicExample
   ],
   imports: [
     BrowserModule,
