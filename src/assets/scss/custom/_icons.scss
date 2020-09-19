@@ -34,9 +34,9 @@
 	}
 }
 
-.icon-lg + .icon-text {
-	width: calc(100% - $icon-size-lg - 1);
-}
+// .icon-lg + .icon-text {
+// 	width: calc(100% - $icon-size-lg - 1);
+// }
 
 .icon-sm {
 	width: $icon-size-sm;
@@ -47,9 +47,9 @@
 	}
 }
 
-.icon-sm + .icon-text {
-	width: calc(100% - $icon-size-sm - 1);
-}
+// .icon-sm + .icon-text {
+// 	width: calc(100% - $icon-size-sm - 1);
+// }
 
 
 // Icons included in shapes
