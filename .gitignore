@@ -38,4 +38,3 @@ testem.log
 .DS_Store
 Thumbs.db
 src/app/user/user.model.ts
-src/environments/environment.prod.ts

@@ -10,7 +10,7 @@ import { Session } from './session/session.component';
 import { LoginComponent } from './login/login.component';
 import { NewPlanningMeeting } from './planning/new.planning.component';
 import { AuthGuard } from './auth/auth.guards.service';
-import { TableBasicExample } from './temporary/temporary';
+// import { TableBasicExample } from './temporary/temporary';
 
 const routes: Routes =[
     { path: 'home',             component: HomeComponent },
@@ -22,7 +22,7 @@ const routes: Routes =[
 
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     // {path: "**", redirectTo:"login"},
-    {path: "teste", component: TableBasicExample }
+    // {path: "teste", component: TableBasicExample }
 ];
 
 @NgModule({
