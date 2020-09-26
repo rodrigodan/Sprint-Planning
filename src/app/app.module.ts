@@ -19,7 +19,7 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UserDataComponent } from './sections/user-data/user.data.component';
 import { AngularFireModule } from 'angularfire2';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { NewPlanningMeeting } from './planning/new.planning.component';
 import { AuthGuard } from './auth/auth.guards.service';
