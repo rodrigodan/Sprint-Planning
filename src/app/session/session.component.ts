@@ -33,9 +33,9 @@ export class Session implements OnInit {
   // notShowEstimates = true;
 
   constructor(
-    private userCommon: UserNoManagerDatas, 
-    private router: Router,
-    private session: SessionService) { }
+    public userCommon: UserNoManagerDatas,
+    public router: Router,
+    public session: SessionService) { }
 
   ngOnInit() {
     this.sessionModel.sprintName = this.userCommon.sprintName;
