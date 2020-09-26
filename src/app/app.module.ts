@@ -17,7 +17,7 @@ import { FooterComponent } from './shared/footer/footer.component';
 import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UserDataComponent } from './sections/user-data/user.data.component';
+// import { UserDataComponent } from './sections/user-data/user.data.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment.prod';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -61,7 +61,7 @@ import { ReadDataRepo10 } from './shared/repositories/read.repo10.service';
     NavbarComponent,
     FooterComponent,
     LoginComponent,
-    UserDataComponent,
+    // UserDataComponent,
     NewPlanningMeeting,
     LoadingSpinner,
   ],
