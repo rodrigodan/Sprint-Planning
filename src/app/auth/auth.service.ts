@@ -9,6 +9,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { rejects } from "assert";
 import { async } from "@angular/core/testing";
 import { UserNoManagerDatas } from "../shared/services/service.user.component";
+import 'firebase/firestore';
+
 
 
 interface AuthResponseData{

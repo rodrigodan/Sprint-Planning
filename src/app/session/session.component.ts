@@ -22,6 +22,7 @@ export class Session implements OnInit {
   public radioButton = '';
   public teste = 'teste';
   public teste2 = true;
+  public userCommon2: UserNoManagerDatas
 
   // displayedColumns: string[] = ['position', 'employee', 'estimation'];
 
@@ -33,14 +34,16 @@ export class Session implements OnInit {
   // notShowEstimates = true;
 
   constructor(
-    public userCommon: UserNoManagerDatas,
-    public router: Router,
-    public session: SessionService) { }
+    private userCommon: UserNoManagerDatas,
+    private router: Router,
+    private session: SessionService) { }
 
   ngOnInit() {
     this.sessionModel.sprintName = this.userCommon.sprintName;
     this.sessionModel.uId = this.userCommon.id;
+    this.userCommon2 = this.userCommon;
     this.session.readLoggeInPeopleAndDataChanges(this.sessionModel);
+    this.userCommon2 = this.userCommon;
   }
 
   public estimate(signupForm: NgForm){
@@ -49,15 +52,18 @@ export class Session implements OnInit {
     }
     this.sessionModel.valueEstimate = signupForm.value.time;
     this.session.updateDevEstimation(this.userCommon.id, this.sessionModel);
+    this.userCommon2 = this.userCommon;
   }
 
   public alternateShowNotShowEstimates(){
     this.sessionModel.notShowEstimates = !this.sessionModel.notShowEstimates;
     this.session.alternateShowNotShowEstimatesForAll(this.sessionModel.notShowEstimates,this.sessionModel.hash)
+    this.userCommon2 = this.userCommon;  
   }
 
   public deleteEstimates(){
     this.session.deleteAllEstimates(this.sessionModel.hash);
+    this.userCommon2 = this.userCommon;
   }
 
   public onRadioButtonClick(){
@@ -65,6 +71,7 @@ export class Session implements OnInit {
     if(this.radioButton !== ''){
       this.radioButton = ''
     }
+    this.userCommon2 = this.userCommon;
   }
 
   public outlierEstimation(){

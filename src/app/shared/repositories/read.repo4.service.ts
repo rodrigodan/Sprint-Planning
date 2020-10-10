@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { UserNoManagerDatas } from "../services/service.user.component";
+import 'firebase/firestore';
+
 
 
 @Injectable()

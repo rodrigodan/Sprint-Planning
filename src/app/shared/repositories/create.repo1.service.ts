@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { NewModelPlanning } from "src/app/planning/new.planning.model";
+import 'firebase/firestore';
+
 
 
 @Injectable()
@@ -16,7 +18,7 @@ export class CreateDataRepo1 {
             .then(value =>{
                 // this.router.navigate(['/meeting-session']);
                 console.log('entered here!');
-                newModelNewPlanning.session = "http://localhost:4200/" + 'user-employee/' + value.id;
+                newModelNewPlanning.session = "https://sprint-planning-826b1.web.app/" + 'user-employee/' + value.id;
                 newModelNewPlanning.hash = value.id;
                 newModelNewPlanning.loadedLink = true;
             });

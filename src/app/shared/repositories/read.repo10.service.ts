@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { SessionModel } from "src/app/session/session.model";
+import 'firebase/firestore';
 
 @Injectable()
 export class ReadDataRepo10 {
