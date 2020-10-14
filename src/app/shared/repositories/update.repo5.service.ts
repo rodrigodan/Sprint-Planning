@@ -1,7 +1,7 @@
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Injectable } from "@angular/core";
 import { UserNoManagerDatas } from '../services/service.user.component';
-import 'firebase/firestore';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UpdateDataRepo5 {
@@ -9,20 +9,30 @@ export class UpdateDataRepo5 {
     constructor(
         private firestore: AngularFirestore) {
     }
-    async updateDataRepo5(req: any, userCommon: UserNoManagerDatas){
+    async updateDataRepo5(teste: any, userCommon: UserNoManagerDatas){
+        let sprintName = '';
         let docRef =  this.firestore.collection("Sessions").doc(userCommon.url);
 
+        // await docRef.update({
+        //     employees: req
+        // })
         await docRef.update({
-            employees: req
+            employees: firebase.firestore.FieldValue.arrayUnion(teste)
         })
-        .then(function() {
-            console.log("Document successfully written!");
-            // worked = true;
+        await docRef.get().toPromise().then(function(doc) {
+            if (doc.exists) {
+                sprintName = doc.data().sprintName;
+            }
         })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-            // worked = false;
-        });
+        return sprintName;
+        // .then(function() {
+        //     console.log("Document successfully written!");
+        //     // worked = true;
+        // })
+        // .catch(function(error) {
+        //     console.error("Error writing document: ", error);
+        //     // worked = false;
+        // });
     }
 
 }

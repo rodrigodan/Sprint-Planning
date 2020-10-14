@@ -30,15 +30,15 @@ export class EmployeeService{
         userCommon.url = this.router.url.substring(this.router.url.indexOf('user-employee/')+14, this.router.url.length);
         this.userCommon.id = this.userCommon.userIdGenerator();
 
-        let {dataFromBase, dataFromBaseSprint} = await this.readRepo4.readDataRepo4(userCommon.url, userCommon);
-        dataFromBase = !dataFromBase?[]:dataFromBase;
+        // let {dataFromBase, dataFromBaseSprint} = await this.readRepo4.readDataRepo4(userCommon.url, userCommon);
+        // dataFromBase = !dataFromBase?[]:dataFromBase;
 
-        dataFromBase.push({name: userCommon.userName, id: userCommon.id});
-        await this.updateRepo5.updateDataRepo5(dataFromBase, userCommon);
+        // dataFromBase.push({name: userCommon.userName, id: userCommon.id});
+        let sprintName = await this.updateRepo5.updateDataRepo5({name: userCommon.userName, id: userCommon.id}, userCommon);
         
         this.userCommon.url = userCommon.url;
         this.userCommon.userType = 'commonUser'
-        this.userCommon.sprintName = dataFromBaseSprint;
+        this.userCommon.sprintName = sprintName;
         this.router.navigate(['/meeting-session/' + userCommon.url]);
     }
 
