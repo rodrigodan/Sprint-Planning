@@ -10,14 +10,11 @@ import { AppComponent } from './app.component';
 import { SignupComponent } from './signup/signup.component';
 import { Session } from './session/session.component';
 import { Employee } from './employee/employee.component';
-import { HomeComponent } from './home/home.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 
-import { HomeModule } from './home/home.module';
 import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
-// import { UserDataComponent } from './sections/user-data/user.data.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment.prod';
 import { AngularFireAuthModule } from 'angularfire2/auth';
@@ -44,6 +41,8 @@ import { UpdateDataRepo7 } from './shared/repositories/update.repo7.service';
 import { ReadDataRepo8 } from './shared/repositories/read.repo8.service';
 import { DeleteDataRepo9 } from './shared/repositories/delete.repo9.service';
 import { ReadDataRepo10 } from './shared/repositories/read.repo10.service';
+import { CommonModule } from '@angular/common';
+import { UserManager } from './shared/Manager/manager.model';
 
 
 
@@ -66,12 +65,12 @@ import { ReadDataRepo10 } from './shared/repositories/read.repo10.service';
     LoadingSpinner,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     NgbModule,
     FormsModule,
     RouterModule,
     AppRoutingModule,
-    HomeModule,
     HttpClientModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -79,7 +78,7 @@ import { ReadDataRepo10 } from './shared/repositories/read.repo10.service';
     MatDialogModule,
     MatTableModule,
   ],
-  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, ReadDataRepo2, UpdateDataRepo3, ReadDataRepo4, UpdateDataRepo5, ReadDataRepo6, UpdateDataRepo7,ReadDataRepo8,DeleteDataRepo9,ReadDataRepo10],
+  providers: [HttpClientModule, RouterModule, AuthGuard, AuthService, AngularFirestore,UserNoManagerDatas, SessionService,EmployeeService, NewPlanningService, CreateDataRepo1, ReadDataRepo2, UpdateDataRepo3, ReadDataRepo4, UpdateDataRepo5, ReadDataRepo6, UpdateDataRepo7,ReadDataRepo8,DeleteDataRepo9,ReadDataRepo10,UserManager],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

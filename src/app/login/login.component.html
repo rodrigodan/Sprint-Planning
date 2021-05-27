@@ -1,13 +1,13 @@
 <main>
     
-    <section style="width: 100%; height: 100vh; padding: 50vh;" *ngIf="isFetching" class="section section-shaped section-lg">
+    <section style="width: 100%; height: 100vh; padding: 50vh;" *ngIf="!loadPageService.pageLoaded" class="section section-shaped section-lg">
             <div class="row justify-content-center">
                 <div class="d-flex align-items-center">
                     <app-loading-spinner></app-loading-spinner>
                 </div>
             </div>
     </section>
-    <section *ngIf="!isFetching" class="section section-shaped section-lg">
+    <section *ngIf="loadPageService.pageLoaded" class="section section-shaped section-lg">
         <div class="shape shape-style-1 bg-gradient-default">
             <span></span>
             <span></span>
@@ -36,16 +36,15 @@
                         <div class="card-body px-lg-2 py-lg-2">
 
 
-                            <form role="form" (ngSubmit)="onSubmit2(f)" #f="ngForm">
+                            <form role="form" (ngSubmit)="submitFormDatasForLoging(f)" #f="ngForm">
 
                                 <div 
                                     class="form-group mb-3" 
-                                    [ngClass]="{'focused':focus===true}"
                                 >
 
                                     <div 
                                         class="input-group input-group-alternative">
-
+<!-- 
                                         <div 
                                         class="input-group-prepend">
                                             <span 
@@ -53,7 +52,7 @@
                                             >
                                                 <i class="ni ni-email-83"></i>
                                             </span>
-                                        </div>
+                                        </div> -->
 
                                         
                                         <input 
@@ -65,8 +64,7 @@
                                             class="form-control" 
                                             placeholder="Email" 
                                             type="email" 
-                                            (focus)="focus=true" 
-                                            (blur)="focus=false"
+                                            required
                                         >
 
                                     </div>
@@ -77,16 +75,15 @@
 
                                 <div 
                                     class="form-group" 
-                                    [ngClass]="{'focused':focus1===true}"
                                 >
                                     <div 
                                         class="input-group input-group-alternative"
                                     >
-                                        <div 
+                                        <!-- <div 
                                             class="input-group-prepend"
                                         >
                                             <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
+                                        </div> -->
 
                                         <input 
                                             ngModel
@@ -95,9 +92,8 @@
                                             required
                                             class="form-control" 
                                             placeholder="Password" 
-                                            type="password" 
-                                            (focus)="focus1=true" 
-                                            (blur)="focus1=false"
+                                            type="password"
+                                            required 
                                         >
                                     </div>
 
@@ -117,6 +113,7 @@
 
                                 <div class="text-center">
                                     <button 
+                                        [disabled]="!f.valid"
                                         type="submit" 
                                         class="btn btn-primary my-4"
                                     >   

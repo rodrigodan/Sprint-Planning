@@ -1,39 +1,10 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { tap, map } from "rxjs/operators";
-import { Subject, Observable } from "rxjs";
-// import { User } from "../user/user.model";
+import { Observable } from "rxjs";
 import { AngularFireAuth } from "angularfire2/auth";
 import { Router } from "@angular/router";
 import { AngularFirestore } from '@angular/fire/firestore';
-import { rejects } from "assert";
-import { async } from "@angular/core/testing";
-import { UserNoManagerDatas } from "../shared/services/service.user.component";
+
 import 'firebase/firestore';
-
-
-
-interface AuthResponseData{
-    kind: string;
-    id: string;
-    idToken: string;
-    email: string;
-    refreshToken: string;
-    expiresIn: string;
-    localId: string;
-    registered?: boolean;
-}
-
-class User{
-    name: string;
-    email: string;
-    password: string;
-    constructor(name,email,password){
-        this.name = name;
-        this.email = email;
-        this.password = password;
-    }
-}
 
 @Injectable()
 export class AuthService{
@@ -44,11 +15,12 @@ export class AuthService{
 
 
     constructor(
-        private http: HttpClient, 
+        // private http: HttpClient, 
         private firebaseAuth: AngularFireAuth, 
         private router: Router,
         private firestore: AngularFirestore,
-        private userCommon: UserNoManagerDatas) {
+        // private userCommon: UserNoManagerDatas
+        ) {
         // this.user = firebaseAuth.authState;
     }
 

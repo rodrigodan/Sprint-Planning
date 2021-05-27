@@ -3,7 +3,6 @@ import { CommonModule, } from '@angular/common';
 import { BrowserModule  } from '@angular/platform-browser';
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeComponent } from './home/home.component';
 import { Employee } from './employee/employee.component';
 import { SignupComponent } from './signup/signup.component';
 import { Session } from './session/session.component';
@@ -13,7 +12,7 @@ import { AuthGuard } from './auth/auth.guards.service';
 // import { TableBasicExample } from './temporary/temporary';
 
 const routes: Routes =[
-    { path: 'home',             component: HomeComponent },
+    // { path: 'home',             canActivate: [AuthGuard], component: HomeComponent },
     { path: 'user-employee/:id',     component: Employee },
     { path: 'register',           component: SignupComponent },
     { path: 'meeting-session/:id',          component: Session },
@@ -21,7 +20,7 @@ const routes: Routes =[
     { path: 'new-planning-meeting',          canActivate: [AuthGuard], component: NewPlanningMeeting },
 
     { path: '', redirectTo: 'login', pathMatch: 'full' },
-    // {path: "**", redirectTo:"login"},
+    {path: "**", canActivate: [AuthGuard], redirectTo:"login"},
     // {path: "teste", component: TableBasicExample }
 ];
 

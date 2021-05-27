@@ -1,48 +1,20 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component} from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
-
-
+import { UserManager } from '../shared/Manager/manager.model';
+import { SignupService } from './signup.service';
 @Component({
     selector: 'app-signup',
     templateUrl: './signup.component.html',
-    styleUrls: ['./signup.component.scss']
+    styleUrls: ['./signup.component.scss'],
+    providers: [SignupService]
 })
-export class SignupComponent implements OnInit {
-    test : Date = new Date();
-    focus;
-    focus1;
-    focus2;
-    
-    constructor(private authService: AuthService) { }
+export class SignupComponent {
 
-    ngOnInit() {
+    constructor(private signupService: SignupService) { }
 
-    }
-    onSubmit(signupForm: NgForm){
-        if(!signupForm.valid){
-            return ;
-        }
-        const email = signupForm.value.email;
-        const username = signupForm.value.username;
-
-        const password = signupForm.value.password;
-
-        console.log(email);
-        console.log(password);
-
-        this.authService.signUp(username, email,password);
-
-        // this.authService.signUp(username, email,password).subscribe(resData => {
-        //     console.log(resData);
-        // },
-        // error => {
-        //     console.log(error);
-        // });
-
-        signupForm.reset();
-        
+    submitFormDatasForSigningUp(signupFormDatas: NgForm){
+            this.signupService.signUp(signupFormDatas);
+            signupFormDatas.reset();
     }
 
 }

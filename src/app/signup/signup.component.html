@@ -25,38 +25,70 @@
                         <div class="card-body px-lg-2 py-lg-2">
 
 
-                            <form role="form" (ngSubmit)="onSubmit(f)" #f="ngForm">
+                            <form role="form" (ngSubmit)="submitFormDatasForSigningUp(f)" #f="ngForm">
 
                                 <div class="form-group" 
-                                    [ngClass]="{'focused':focus===true}">
-                                    <div class="input-group input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-hat-3"></i></span>
-                                        </div>
-                                        <input ngModel name="username" class="form-control" placeholder="Name" type="text" (focus)="focus=true" (blur)="focus=false">
+                                    >
+                                    <div 
+                                        class="input-group input-group-alternative mb-3">
+                                        <!-- <div 
+                                            class="input-group-prepend">
+                                            <span 
+                                                class="input-group-text">
+                                                    <i class="ni ni-hat-3"></i>
+                                            </span>
+                                        </div> -->
+
+                                        <input 
+                                            ngModel 
+                                            name="name" 
+                                            class="form-control" 
+                                            placeholder="Name" 
+                                            type="text"
+                                            requried>
                                     </div>
                                 </div>
-                                <div class="form-group" [ngClass]="{'focused':focus1===true}">
-                                    <div class="input-group input-group-alternative mb-3">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                                        </div>
+                                <div 
+                                    class="form-group">
+                                    <div 
+                                        class="input-group input-group-alternative mb-3">
+                                        <!-- <div 
+                                            class="input-group-prepend">
+                                            <span 
+                                                class="input-group-text">
+                                                    <i class="ni ni-email-83"></i>
+                                            </span>
+                                        </div> -->
                                         <input 
                                             ngModel 
                                             name="email" 
                                             class="form-control" 
                                             placeholder="Email" 
-                                            type="email" (focus)="focus1=true" (blur)="focus1=false">
+                                            type="email"
+                                            required>
                                     </div>
                                 </div>
-                                <div class="form-group" [ngClass]="{'focused':focus2===true}">
-                                    <div class="input-group input-group-alternative">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                                        </div>
-                                        <input ngModel name="password" class="form-control" placeholder="Password" type="password" (focus)="focus2=true" (blur)="focus2=false">
+                                <div 
+                                    class="form-group">
+                                    <div 
+                                        class="input-group input-group-alternative">
+                                        <!-- <div 
+                                            class="input-group-prepend">
+                                            <span 
+                                                class="input-group-text">
+                                                    <i class="ni ni-lock-circle-open"></i>
+                                            </span>
+                                        </div> -->
+                                        <input 
+                                            ngModel 
+                                            name="password" 
+                                            class="form-control" 
+                                            placeholder="Password" 
+                                            type="password"
+                                            requried>
                                     </div>
                                 </div>
+
                                 <div class="text-muted font-italic">
                                     <a [routerLink]="['/login']" class="text-light">
                                       If you already have an account, <span style="color: #1a73e8;">Sign in</span> 
@@ -64,7 +96,13 @@
 
                                 </div>
                                 <div class="text-center">
-                                    <button type="submit" class="btn btn-primary mt-4">Create account</button>
+                                    <button 
+                                        type="submit" 
+                                        class="btn btn-primary mt-4"
+                                        [disabled]="!f.valid"
+                                    >
+                                        Create account
+                                    </button>
                                 </div>
 
                             </form>

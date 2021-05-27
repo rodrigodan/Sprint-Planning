@@ -1,46 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
-import { Router } from '@angular/router';
+import { LoadPageService } from '../shared/services/loading.service'
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  providers: [LoadPageService]
 })
-export class LoginComponent implements OnInit {
-  isFetching = false;
-  invalidCredentials = false;
-  focus;
-  focus1;
-  constructor(private authService: AuthService, private router: Router) { }
+export class LoginComponent {
+    invalidCredentials = false;
 
-  ngOnInit() {
-  }
+    constructor(private authService: AuthService, public loadPageService: LoadPageService) { }
+    submitFormDatasForLoging(signupForm: NgForm){
 
-  onSubmit2(signupForm: NgForm){
-    if(!signupForm.valid){
-        return ;
+        this.loadPageService.changeToNoLoaded();    
+        const email = signupForm.value.email;
+        const password = signupForm.value.password; 
+        console.log(email);
+        console.log(password);
+        this.authService.login(email,password).
+        then(() => {
+        this.invalidCredentials = false;
+            this.loadPageService.changeToLoaded();   
+        })
+        .catch(() => {
+        this.invalidCredentials = true;
+        
+            this.loadPageService.changeToLoaded();   
+        });
+        signupForm.reset();
     }
-    this.isFetching = true;
-
-    const email = signupForm.value.email;
-    const password = signupForm.value.password;
-
-    console.log(email);
-    console.log(password);
-    this.authService.login(email,password).
-    then(valueReturned => {
-      this.invalidCredentials = false;
-      this.isFetching = false;
-    })
-    .catch(valueReturned => {
-      this.invalidCredentials = true;
-      
-      this.isFetching = false;
-    });
-    signupForm.reset();
-}
-
-
 }
