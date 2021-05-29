@@ -32,11 +32,11 @@
                         </div>
 
                         
-                        <span style="color:red;" *ngIf="invalidCredentials">E-mail or Password invalid</span>
+                        <span style="color:red;" *ngIf="credentialFormValidation.invalidCredentials">E-mail or Password invalid</span>
                         <div class="card-body px-lg-2 py-lg-2">
 
 
-                            <form role="form" (ngSubmit)="submitFormDatasForLoging(f)" #f="ngForm">
+                            <form role="form" (ngSubmit)="submitFormDatasForLogingAndManagingContentFromScreen(f)" #f="ngForm">
 
                                 <div 
                                     class="form-group mb-3" 

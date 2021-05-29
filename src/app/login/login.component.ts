@@ -1,35 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthService } from '../auth/auth.service';
+import { CredentialsFormValidationFactory } from '../shared/config/credentials.form.validation.factory';
 import { LoadPageService } from '../shared/services/loading.service'
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
-  providers: [LoadPageService]
+  providers: [LoadPageService, LoginService]
 })
 export class LoginComponent {
-    invalidCredentials = false;
+    public credentialFormValidation: CredentialsFormValidation = CredentialsFormValidationFactory.create('login');
+    constructor(
+        public loadPageService: LoadPageService,
+        private loginService: LoginService) { }
 
-    constructor(private authService: AuthService, public loadPageService: LoadPageService) { }
-    submitFormDatasForLoging(signupForm: NgForm){
+    public submitFormDataForLogin(signupForm){
 
-        this.loadPageService.changeToNoLoaded();    
-        const email = signupForm.value.email;
-        const password = signupForm.value.password; 
-        console.log(email);
-        console.log(password);
-        this.authService.login(email,password).
-        then(() => {
-        this.invalidCredentials = false;
-            this.loadPageService.changeToLoaded();   
-        })
-        .catch(() => {
-        this.invalidCredentials = true;
-        
-            this.loadPageService.changeToLoaded();   
-        });
+        this.loginService.login(signupForm, this.credentialFormValidation) 
+            .then(() => {
+                this.credentialFormValidation.invalidCredentials = false;
+                this.loadPageService.changeToPageLoaded();   
+            })
+            .catch(() => {
+                this.credentialFormValidation.invalidCredentials = true;
+                this.loadPageService.changeToPageLoaded();   
+            });
+    }
+
+    public submitFormDatasForLogingAndManagingContentFromScreen(signupForm: NgForm){
+        this.loadPageService.changeToLoadingPage(); 
+        this.submitFormDataForLogin(signupForm);
         signupForm.reset();
     }
 }

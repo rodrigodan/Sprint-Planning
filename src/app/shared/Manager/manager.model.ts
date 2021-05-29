@@ -1,5 +1,5 @@
 export class UserManager{
-    name: string;
+    name?: string;
     email: string;
     password: string;
 }
