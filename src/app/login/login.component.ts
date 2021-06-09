@@ -21,16 +21,16 @@ export class LoginComponent {
         this.loginService.login(signupForm, this.credentialFormValidation) 
             .then(() => {
                 this.credentialFormValidation.invalidCredentials = false;
-                this.loadPageService.changeToPageLoaded();   
+                this.loadPageService.changePageToAlreadyLoaded();   
             })
             .catch(() => {
                 this.credentialFormValidation.invalidCredentials = true;
-                this.loadPageService.changeToPageLoaded();   
+                this.loadPageService.changePageToAlreadyLoaded();   
             });
     }
 
-    public submitFormDatasForLogingAndManagingContentFromScreen(signupForm: NgForm){
-        this.loadPageService.changeToLoadingPage(); 
+    public submitDataForLogingAndManagingContentFromScreen(signupForm: NgForm){
+        this.loadPageService.changePageToLoading(); 
         this.submitFormDataForLogin(signupForm);
         signupForm.reset();
     }

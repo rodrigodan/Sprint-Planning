@@ -6,11 +6,11 @@ export class LoadPageService{
 
     private _pageLoaded:boolean = true;
 
-    public changeToLoadingPage(): boolean{
+    public changePageToLoading(): boolean{
         this._pageLoaded = false;
         return this._pageLoaded;
     }
-    public changeToPageLoaded(): boolean{
+    public changePageToAlreadyLoaded(): boolean{
         this._pageLoaded = true;
         return this._pageLoaded;
     }
