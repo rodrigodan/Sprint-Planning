@@ -1,3 +1,3 @@
-interface CredentialsFormValidation{
+export interface CredentialsFormValidation{
     invalidCredentials;
 };
