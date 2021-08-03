@@ -4,7 +4,6 @@ import { CredentialsFormValidationFactory } from '../shared/config/credentials.f
 import { CredentialsFormValidation } from '../shared/config/credentials.form.validation.interface';
 import { LoadPageService } from '../shared/services/loading.service'
 import { LoginService } from './login.service';
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -12,7 +11,6 @@ import { LoginService } from './login.service';
   providers: [LoadPageService, LoginService, { provide: 'login', useValue: 'login' },{provide:'CredentialsFormValidation', useFactory: CredentialsFormValidationFactory.create, deps: ['login'] }]
 })
 export class LoginComponent { 
-    // public credentialFormValidation: CredentialsFormValidation = CredentialsFormValidationFactory.create('login');
     constructor(
         @Inject('CredentialsFormValidation') private credentialFormValidation: CredentialsFormValidation ,
         public loadPageService: LoadPageService,

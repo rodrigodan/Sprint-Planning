@@ -1,4 +1,5 @@
-import { CredentialsFormValidationLogin } from "./credentials.form.service";
+import { CredentialsFormValidationLogin } from "./credentials.form-login.service";
+import { CredentialsFormValidationSignUp } from "./credentials.form-signup.service";
 import { CredentialsFormValidation } from "./credentials.form.validation.interface";
 
 export class CredentialsFormValidationFactory{
@@ -6,6 +7,8 @@ export class CredentialsFormValidationFactory{
         switch (form) {
             case 'login':
                 return new CredentialsFormValidationLogin();
+            case 'SignUp':
+                return new CredentialsFormValidationSignUp();
         }
     }
 }
